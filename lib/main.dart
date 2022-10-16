@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:comedor_utt/src/utils/my_colors.dart';
 import 'package:comedor_utt/src/login/login_page.dart';
+import 'package:comedor_utt/src/register/register_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,8 +23,10 @@ class _MyAppState extends State<MyApp> {
       initialRoute: 'login',
       routes: {
         'login': (BuildContext context) => const LoginPage(),
+        'register': (BuildContext context) => const RegisterPage(),
       },
       theme: ThemeData(
+        // fontFamily: 'Roboto',
         primaryColor: MyColors.primaryColor
       ),
     );
