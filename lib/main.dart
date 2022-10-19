@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:comedor_utt/src/utils/my_colors.dart';
-import 'package:comedor_utt/src/login/login_page.dart';
-import 'package:comedor_utt/src/register/register_page.dart';
+import 'package:comedor_utt/src/pages/login/login_page.dart';
+import 'package:comedor_utt/src/pages/register/register_page.dart';
 
 void main() {
   runApp(const MyApp());

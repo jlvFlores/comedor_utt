@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:comedor_utt/src/register/register_controller.dart';
+import 'package:comedor_utt/src/pages/register/register_controller.dart';
 import 'package:comedor_utt/src/utils/my_colors.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -29,11 +29,6 @@ class _RegisterPageState extends State<RegisterPage> {
         width: double.infinity,
         child: Stack(
           children: [
-            Positioned(
-              top: 20, 
-              left: 15, 
-              child: _iconBack()
-            ),
             SingleChildScrollView(
               child: Column(
                 children: [
@@ -45,21 +40,13 @@ class _RegisterPageState extends State<RegisterPage> {
                   _textFieldPassword(),
                   _textFieldConfirmPassword(),
                   _buttonRegister(),
+                  _textBack(),
                 ],
               ),
             ),
           ],
         ),
       )
-    );
-  }
-
-  Widget _iconBack() {
-    //posible bug
-    return IconButton(
-      onPressed: _con.goToLoginPage,
-      icon: const Icon(Icons.arrow_back_ios),
-      color: MyColors.primaryColor,
     );
   }
 
@@ -83,7 +70,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget _imageUser() {
     return Container(
-      margin: const EdgeInsets.only(top: 40, bottom: 15),
+      margin: const EdgeInsets.only(top: 30, bottom: 15),
       child: CircleAvatar(
         backgroundImage: const AssetImage('assets/img/user_profile_2.png'),
         radius: 60,
@@ -214,6 +201,25 @@ class _RegisterPageState extends State<RegisterPage> {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
             padding: const EdgeInsets.symmetric(vertical: 15)),
         child: const Text('Registrarse'),
+      ),
+    );
+  }
+
+  Widget _textBack() {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          GestureDetector(
+            onTap: _con.goToLoginPage,
+            child: const Text(
+              'Regresar',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, color: MyColors.primaryColor),
+            ),
+          )
+        ],
       ),
     );
   }

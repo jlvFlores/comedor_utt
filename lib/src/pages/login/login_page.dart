@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:comedor_utt/src/login/login_controller.dart';
+import 'package:comedor_utt/src/pages/login/login_controller.dart';
 import 'package:comedor_utt/src/utils/my_colors.dart';
 // import 'package:lottie/lottie.dart';
 
