@@ -27,11 +27,29 @@ class UsersProvider {
       final data = json.decode(res.body);
       ResponseApi responseApi = ResponseApi.fromJson(data);
       return responseApi;
-    } 
-    catch (e) {
+    } catch (e) {
       print('Error: $e');
       return null;
     }
+  }
 
+  Future<ResponseApi?> login(String userCode, String password) async {
+    try {
+      Uri url = Uri.http(_url, '$_api/login');
+      String bodyParams = json.encode({
+        'user_code': userCode,
+        'password': password,
+      });
+      Map<String, String> headers = {
+        'Content-type': 'application/json',
+      };
+      final res = await http.post(url, headers: headers, body: bodyParams);
+      final data = json.decode(res.body);
+      ResponseApi responseApi = ResponseApi.fromJson(data);
+      return responseApi;
+    } catch (e) {
+      print('Error: $e');
+      return null;
+    }
   }
 }
