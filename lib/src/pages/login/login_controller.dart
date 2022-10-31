@@ -1,5 +1,5 @@
-import 'package:comedor_utt/src/models/user.dart';
 import 'package:flutter/material.dart';
+import 'package:comedor_utt/src/models/user.dart';
 import 'package:comedor_utt/src/models/response_api.dart';
 import 'package:comedor_utt/src/provider/users_provider.dart';
 import 'package:comedor_utt/src/utils/my_snackbar.dart';
@@ -19,12 +19,11 @@ class LoginController {
 
     User user = User.fromJson(await sharedPref.read('user') ?? {});
 
-    // NEED TO CHECK AGAIN
-    // ignore: unnecessary_null_comparison
+    print('User Session Token: ${user.sessionToken}');
+
     if (user.sessionToken != null) {
       // ignore: use_build_context_synchronously
-      Navigator.pushNamedAndRemoveUntil(
-          context, 'client/products/list', (route) => false);
+      Navigator.pushNamedAndRemoveUntil(context, 'client/products/list', (route) => false);
     }
   }
 
@@ -37,14 +36,12 @@ class LoginController {
     String password = passwordController.text.trim();
     ResponseApi? responseApi = await usersProvider.login(userCode, password);
 
-    // print('Respuesta object: $responseApi');
-    // print('Respuesta: ${responseApi!.toJson()}');
+    print('Respuesta object: $responseApi');
 
     if (responseApi!.success == true) {
       User user = User.fromJson(responseApi.data);
-      sharedPref.save('user', user.toJson());
-      Navigator.pushNamedAndRemoveUntil(
-          context!, 'client/products/list', (route) => false);
+      sharedPref.save('user', user.toJson()); // Se almacena el usuario dentro del dispositivo
+      Navigator.pushNamedAndRemoveUntil(context!, 'client/products/list', (route) => false);
     } else {
       MySnackBar.show(context!, '${responseApi.message}');
     }

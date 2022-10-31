@@ -21,13 +21,34 @@ class UsersProvider {
       Uri url = Uri.http(_url, '$_api/create');
       String bodyParams = json.encode(user);
       Map<String, String> headers = {
-        'Content-type': 'application/json',
+        'Content-type': 'application/json'
       };
       final res = await http.post(url, headers: headers, body: bodyParams);
       final data = json.decode(res.body);
       ResponseApi responseApi = ResponseApi.fromJson(data);
       return responseApi;
-    } catch (e) {
+    } 
+    catch (e) {
+      print('Error: $e');
+      return null;
+    }
+  }
+
+    Future<ResponseApi?> logout(String idUser) async {
+    try {
+      Uri url = Uri.http(_url, '$_api/logout');
+      String bodyParams = json.encode({
+        'id' : idUser
+      });
+      Map<String, String> headers = {
+        'Content-type': 'application/json'
+      };
+      final res = await http.post(url, headers: headers, body: bodyParams);
+      final data = json.decode(res.body);
+      ResponseApi responseApi = ResponseApi.fromJson(data);
+      return responseApi;
+    }
+    catch(e) {
       print('Error: $e');
       return null;
     }
@@ -38,16 +59,17 @@ class UsersProvider {
       Uri url = Uri.http(_url, '$_api/login');
       String bodyParams = json.encode({
         'user_code': userCode,
-        'password': password,
+        'password': password
       });
       Map<String, String> headers = {
-        'Content-type': 'application/json',
+        'Content-type': 'application/json'
       };
       final res = await http.post(url, headers: headers, body: bodyParams);
       final data = json.decode(res.body);
       ResponseApi responseApi = ResponseApi.fromJson(data);
       return responseApi;
-    } catch (e) {
+    }
+    catch(e) {
       print('Error: $e');
       return null;
     }

@@ -6,12 +6,12 @@ String userToJson(User data) => json.encode(data.toJson());
 
 class User {
 
-    String id;
-    String email;
-    String userCode;
-    String name;
-    String password;
-    String sessionToken;
+    String? id;
+    String? email;
+    String? userCode;
+    String? name;
+    String? password;
+    String? sessionToken;
 
     User({
         required this.id,
@@ -28,7 +28,7 @@ class User {
         userCode: json["user_code"],
         name: json["name"],
         password: json["password"],
-        sessionToken: json["session_token"],
+        sessionToken: json["session_token"]
     );
 
     Map<String, dynamic> toJson() => {

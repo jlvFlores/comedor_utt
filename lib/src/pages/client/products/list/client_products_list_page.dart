@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:comedor_utt/src/pages/client/products/list/client_products_list_controller.dart';
 
 class ClientProductsListPage extends StatefulWidget {
   const ClientProductsListPage({super.key});
@@ -8,11 +10,25 @@ class ClientProductsListPage extends StatefulWidget {
 }
 
 class _ClientProductsListPageState extends State<ClientProductsListPage> {
+  ClientProductsListController con = ClientProductsListController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+      con.init(context);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Text('Lista de Productos'),
+        child: ElevatedButton(
+          onPressed: con.logout, 
+          child: const Text('Cerrar session'),
+        )
       ),
     );
   }

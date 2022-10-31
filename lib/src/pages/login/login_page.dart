@@ -12,14 +12,14 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final LoginController _con = LoginController();
+  LoginController con = LoginController();
 
   @override
   void initState() {
     super.initState();
 
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-      _con.init(context);
+      con.init(context);
     });
   }
 
@@ -112,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)),
       child: TextField(
-        controller: _con.userCodeController,
+        controller: con.userCodeController,
         // keyboardType: TextInputType.text,
         decoration: const InputDecoration(
             hintText: 'Matricula',
@@ -134,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)),
       child: TextField(
-        controller: _con.passwordController,
+        controller: con.passwordController,
         obscureText: true,
         // keyboardType: TextInputType.text,
         decoration: const InputDecoration(
@@ -155,7 +155,7 @@ class _LoginPageState extends State<LoginPage> {
       width: double.infinity,
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 30),
       child: ElevatedButton(
-        onPressed: _con.login,
+        onPressed: con.login,
         style: ElevatedButton.styleFrom(
             backgroundColor: MyColors.primaryColor,
             shape:
@@ -179,7 +179,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           const SizedBox(width: 7),
           GestureDetector(
-            onTap: _con.goToRegisterPage,
+            onTap: con.goToRegisterPage,
             child: const Text(
               'Registrate',
               style: TextStyle(

@@ -11,14 +11,14 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final RegisterController _con = RegisterController();
+  RegisterController con = RegisterController();
 
   @override
   void initState() {
     super.initState();
 
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-      _con.init(context);
+      con.init(context);
     });
   }
 
@@ -86,7 +86,7 @@ class _RegisterPageState extends State<RegisterPage> {
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)),
       child: TextField(
-        controller: _con.emailController,
+        controller: con.emailController,
         keyboardType: TextInputType.emailAddress,
         decoration: const InputDecoration(
             hintText: 'Correo electronico',
@@ -107,7 +107,7 @@ class _RegisterPageState extends State<RegisterPage> {
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)),
       child: TextField(
-        controller: _con.userCodeController,
+        controller: con.userCodeController,
         // keyboardType: TextInputType.text,
         decoration: const InputDecoration(
             hintText: 'Matricula',
@@ -128,7 +128,7 @@ class _RegisterPageState extends State<RegisterPage> {
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)),
       child: TextField(
-        controller: _con.nameController,
+        controller: con.nameController,
         // keyboardType: TextInputType.text,
         decoration: const InputDecoration(
             hintText: 'Nombre',
@@ -150,7 +150,7 @@ class _RegisterPageState extends State<RegisterPage> {
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)),
       child: TextField(
-        controller: _con.passwordController,
+        controller: con.passwordController,
         obscureText: true,
         // keyboardType: TextInputType.text,
         decoration: const InputDecoration(
@@ -173,7 +173,7 @@ class _RegisterPageState extends State<RegisterPage> {
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)),
       child: TextField(
-        controller: _con.confirmPasswordController,
+        controller: con.confirmPasswordController,
         obscureText: true,
         // keyboardType: TextInputType.text,
         decoration: const InputDecoration(
@@ -194,7 +194,7 @@ class _RegisterPageState extends State<RegisterPage> {
       width: double.infinity,
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 30),
       child: ElevatedButton(
-        onPressed: _con.register,
+        onPressed: con.register,
         style: ElevatedButton.styleFrom(
             backgroundColor: MyColors.primaryColor,
             shape:
@@ -212,7 +212,7 @@ class _RegisterPageState extends State<RegisterPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           GestureDetector(
-            onTap: _con.goToLoginPage,
+            onTap: con.goToLoginPage,
             child: const Text(
               'Regresar',
               style: TextStyle(
