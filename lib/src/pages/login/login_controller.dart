@@ -4,6 +4,7 @@ import 'package:comedor_utt/src/models/response_api.dart';
 import 'package:comedor_utt/src/provider/users_provider.dart';
 import 'package:comedor_utt/src/utils/my_snackbar.dart';
 import 'package:comedor_utt/src/utils/shared_pref.dart';
+// ignore_for_file: use_build_context_synchronously
 
 class LoginController {
   BuildContext? context;
@@ -22,8 +23,12 @@ class LoginController {
     print('User Session Token: ${user.sessionToken}');
 
     if (user.sessionToken != null) {
-      // ignore: use_build_context_synchronously
-      Navigator.pushNamedAndRemoveUntil(context, 'client/products/list', (route) => false);
+      print('USER LOGGED IN: ${user.toJson()}');
+      if (user.roles.length > 1) {
+        Navigator.pushNamedAndRemoveUntil(context, 'roles', (route) => false);
+      } else {
+        Navigator.pushNamedAndRemoveUntil(context, user.roles[0]!.route, (route) => false);
+      }
     }
   }
 
@@ -40,8 +45,15 @@ class LoginController {
 
     if (responseApi!.success == true) {
       User user = User.fromJson(responseApi.data);
-      sharedPref.save('user', user.toJson()); // Se almacena el usuario dentro del dispositivo
-      Navigator.pushNamedAndRemoveUntil(context!, 'client/products/list', (route) => false);
+      sharedPref.save('user',
+          user.toJson()); // Se almacena el usuario dentro del dispositivo
+
+      print('USER LOGGED IN: ${user.toJson()}');
+      if (user.roles.length > 1) {
+        Navigator.pushNamedAndRemoveUntil(context!, 'roles', (route) => false);
+      } else {
+        Navigator.pushNamedAndRemoveUntil(context!, user.roles[0]!.route, (route) => false);
+      }
     } else {
       MySnackBar.show(context!, '${responseApi.message}');
     }

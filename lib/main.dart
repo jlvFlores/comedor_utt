@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:comedor_utt/src/utils/my_colors.dart';
 import 'package:comedor_utt/src/pages/login/login_page.dart';
 import 'package:comedor_utt/src/pages/register/register_page.dart';
+import 'package:comedor_utt/src/pages/roles/roles_page.dart';
 import 'package:comedor_utt/src/pages/client/products/list/client_products_list_page.dart';
+import 'package:comedor_utt/src/pages/admin/orders/list/admin_order_list.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,11 +27,14 @@ class _MyAppState extends State<MyApp> {
       routes: {
         'login': (BuildContext context) => const LoginPage(),
         'register': (BuildContext context) => const RegisterPage(),
+        'roles': (BuildContext context) => const RolesPage(),
         'client/products/list': (BuildContext context) => const ClientProductsListPage(),
+        'admin/orders/list': (BuildContext context) => const AdminOrdersListPage(),
       },
       theme: ThemeData(
         // fontFamily: 'Roboto',
-        primaryColor: MyColors.primaryColor
+        primaryColor: MyColors.primaryColor,
+        colorScheme: const ColorScheme.light(primary: MyColors.primaryColor)
       ),
     );
   }

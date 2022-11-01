@@ -52,16 +52,18 @@ class RegisterController {
         userCode: userCode,
         name: name,
         password: password,
-        sessionToken: '');
+        sessionToken: '', 
+        roles: []
+    );
 
     ResponseApi? responseApi = await usersProvider.create(user);
 
-    if (responseApi != null){
-      MySnackBar.show(context!, '${responseApi.message}');
-    } else {
-      //Delete later
-      //check conexion or user already exist
-      MySnackBar.show(context!, 'Usuario existe o el servidor está inactivo');
+    MySnackBar.show(context!, '${responseApi?.message}');
+
+    if (responseApi?.success == true) {
+      Future.delayed(const Duration(seconds: 2), () {
+        Navigator.pushReplacementNamed(context!, 'login');
+      });
     }
 
     print('RESPUESTA: ${responseApi?.toJson()}');
