@@ -4,7 +4,7 @@ import 'package:comedor_utt/src/pages/login/login_page.dart';
 import 'package:comedor_utt/src/pages/register/register_page.dart';
 import 'package:comedor_utt/src/pages/roles/roles_page.dart';
 import 'package:comedor_utt/src/pages/client/products/list/client_products_list_page.dart';
-import 'package:comedor_utt/src/pages/admin/orders/list/admin_order_list.dart';
+import 'package:comedor_utt/src/pages/admin/orders/list/admin_orders_list_page.dart';
 
 void main() {
   runApp(const MyApp());

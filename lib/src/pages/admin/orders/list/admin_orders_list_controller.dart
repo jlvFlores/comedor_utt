@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:comedor_utt/src/models/user.dart';
 import 'package:comedor_utt/src/utils/shared_pref.dart';
 
-class ClientProductsListController {
+class AdminOrdersListController {
   BuildContext? context;
   SharedPref sharedPref = SharedPref();
   GlobalKey<ScaffoldState> key = GlobalKey<ScaffoldState>();

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:comedor_utt/src/utils/my_colors.dart';
-import 'package:comedor_utt/src/pages/client/products/list/client_products_list_controller.dart';
+import 'package:comedor_utt/src/pages/admin/orders/list/admin_orders_list_controller.dart';
 
-class ClientProductsListPage extends StatefulWidget {
-  const ClientProductsListPage({super.key});
+class AdminOrdersListPage extends StatefulWidget {
+  const AdminOrdersListPage({super.key});
 
   @override
-  State<ClientProductsListPage> createState() => _ClientProductsListPageState();
+  State<AdminOrdersListPage> createState() => _AdminOrdersListPageState();
 }
 
-class _ClientProductsListPageState extends State<ClientProductsListPage> {
-  ClientProductsListController con = ClientProductsListController();
+class _AdminOrdersListPageState extends State<AdminOrdersListPage> {
+  AdminOrdersListController con = AdminOrdersListController();
 
   @override
   void initState() {
@@ -30,11 +30,11 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
         leading: menuDrawer(),
       ),
       drawer: drawer(),
-      body: Center(
-          child: ElevatedButton(
-        onPressed: con.logout,
-        child: const Text('Cerrar session'),
-      )),
+      body: const Center(
+        child: Text(
+          'Admin Page'
+        )
+      )
     );
   }
 
@@ -62,45 +62,33 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
                 Text(
                   '${con.user?.name ?? ''} ',
                   style: const TextStyle(
-                    fontSize: 18,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold
-                  ),
+                      fontSize: 18,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
                   maxLines: 1,
                 ),
                 const SizedBox(height: 10),
                 Text(
                   '${con.user?.email ?? ''} ',
                   style: TextStyle(
-                    fontSize: 13,
-                    color: Colors.grey[300],
-                    fontWeight: FontWeight.bold,
-                    fontStyle: FontStyle.italic
-                  ),
+                      fontSize: 13,
+                      color: Colors.grey[300],
+                      fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.italic),
                   maxLines: 1,
                 ),
                 const SizedBox(height: 10),
                 Text(
                   '${con.user?.userCode ?? ''} ',
                   style: TextStyle(
-                    fontSize: 13,
-                    color: Colors.grey[300],
-                    fontWeight: FontWeight.bold,
-                    fontStyle: FontStyle.italic
-                  ),
+                      fontSize: 13,
+                      color: Colors.grey[300],
+                      fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.italic),
                   maxLines: 1,
                 )
               ],
-            )
-          ),
-          const ListTile(
-            title: Text('Editar perfil'),
-            trailing: Icon(Icons.edit_outlined),
-          ),
-          const ListTile(
-            title: Text('Mis pedidos'),
-            trailing: Icon(Icons.shopping_cart_outlined),
-          ),
+            )),
           con.user != null ? 
           con.user!.roles.length > 1 ?
           ListTile(
@@ -117,7 +105,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
       ),
     );
   }
-  
+
   void refresh() {
     setState(() {});
   }
