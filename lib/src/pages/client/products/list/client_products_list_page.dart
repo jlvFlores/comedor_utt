@@ -27,7 +27,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
     return Scaffold(
       key: con.key,
       appBar: AppBar(
-        leading: menuDrawer(),
+        leading: menuDrawerIcon(),
       ),
       drawer: drawer(),
       body: Center(
@@ -38,7 +38,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
     );
   }
 
-  Widget menuDrawer() {
+  Widget menuDrawerIcon() {
     return GestureDetector(
       onTap: con.openDrawer,
       child: Container(
@@ -93,9 +93,10 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
               ],
             )
           ),
-          const ListTile(
-            title: Text('Editar perfil'),
-            trailing: Icon(Icons.edit_outlined),
+          ListTile(
+            onTap: con.goToUpdatePage,
+            title: const Text('Editar perfil'),
+            trailing: const Icon(Icons.edit_outlined),
           ),
           const ListTile(
             title: Text('Mis pedidos'),

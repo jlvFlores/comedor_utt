@@ -4,6 +4,7 @@ import 'package:comedor_utt/src/pages/login/login_page.dart';
 import 'package:comedor_utt/src/pages/register/register_page.dart';
 import 'package:comedor_utt/src/pages/roles/roles_page.dart';
 import 'package:comedor_utt/src/pages/client/products/list/client_products_list_page.dart';
+import 'package:comedor_utt/src/pages/client/update/client_update_page.dart';
 import 'package:comedor_utt/src/pages/admin/orders/list/admin_orders_list_page.dart';
 
 void main() {
@@ -29,6 +30,7 @@ class _MyAppState extends State<MyApp> {
         'register': (BuildContext context) => const RegisterPage(),
         'roles': (BuildContext context) => const RolesPage(),
         'client/products/list': (BuildContext context) => const ClientProductsListPage(),
+        'client/update': (BuildContext context) => const ClientUpdatePage(),
         'admin/orders/list': (BuildContext context) => const AdminOrdersListPage(),
       },
       theme: ThemeData(

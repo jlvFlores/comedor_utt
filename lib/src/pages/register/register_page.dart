@@ -32,15 +32,15 @@ class _RegisterPageState extends State<RegisterPage> {
             SingleChildScrollView(
               child: Column(
                 children: [
-                  _textRegister(),
-                  _imageUser(),
-                  _textFieldEmail(),
-                  _textFieldUserCode(),
-                  _textFieldName(),
-                  _textFieldPassword(),
-                  _textFieldConfirmPassword(),
-                  _buttonRegister(),
-                  _textBack(),
+                  textRegister(),
+                  imageUser(),
+                  textFieldEmail(),
+                  textFieldUserCode(),
+                  textFieldName(),
+                  textFieldPassword(),
+                  textFieldConfirmPassword(),
+                  buttonRegister(),
+                  textBack(),
                 ],
               ),
             ),
@@ -50,7 +50,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget _textRegister() {
+  Widget textRegister() {
     return Container(
       margin: const EdgeInsets.only(top: 25),
       child: Row(
@@ -68,7 +68,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget _imageUser() {
+  Widget imageUser() {
     return Container(
       margin: const EdgeInsets.only(top: 30, bottom: 15),
       child: CircleAvatar(
@@ -79,7 +79,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget _textFieldEmail() {
+  Widget textFieldEmail() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 5),
       decoration: BoxDecoration(
@@ -100,7 +100,7 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
     );
   }
-    Widget _textFieldUserCode() {
+    Widget textFieldUserCode() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 5),
       decoration: BoxDecoration(
@@ -121,7 +121,7 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
     );
   }
-    Widget _textFieldName() {
+    Widget textFieldName() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 5),
       decoration: BoxDecoration(
@@ -143,7 +143,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget _textFieldPassword() {
+  Widget textFieldPassword() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 5),
       decoration: BoxDecoration(
@@ -166,7 +166,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget _textFieldConfirmPassword() {
+  Widget textFieldConfirmPassword() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 5),
       decoration: BoxDecoration(
@@ -189,7 +189,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget _buttonRegister() {
+  Widget buttonRegister() {
     return Container(
       width: double.infinity,
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 30),
@@ -205,14 +205,14 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget _textBack() {
+  Widget textBack() {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           GestureDetector(
-            onTap: con.goToLoginPage,
+            onTap: con.back,
             child: const Text(
               'Regresar',
               style: TextStyle(

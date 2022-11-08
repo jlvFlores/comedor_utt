@@ -27,7 +27,7 @@ class _AdminOrdersListPageState extends State<AdminOrdersListPage> {
     return Scaffold(
       key: con.key,
       appBar: AppBar(
-        leading: menuDrawer(),
+        leading: menuDrawerIcon(),
       ),
       drawer: drawer(),
       body: const Center(
@@ -38,7 +38,7 @@ class _AdminOrdersListPageState extends State<AdminOrdersListPage> {
     );
   }
 
-  Widget menuDrawer() {
+  Widget menuDrawerIcon() {
     return GestureDetector(
       onTap: con.openDrawer,
       child: Container(

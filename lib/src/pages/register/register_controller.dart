@@ -74,11 +74,7 @@ class RegisterController {
     print(confirmPassword);
   }
 
-  void goToLoginPage() {
-    Navigator.pushNamed(context!, 'login');
+  void back() {
+    Navigator.pop(context!);
   }
-
-  // void back() {
-  //   Navigator.pop(context!);
-  // }
 }

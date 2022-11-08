@@ -29,28 +29,24 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: SizedBox(
         width: double.infinity,
-        child: Stack(
-          children: [
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  _textComedorUtt(),
-                  // _loadingAnimation(),
-                  _imageBanner(),
-                  _textFieldUserCode(),
-                  _textFieldPassword(),
-                  _buttonLogin(),
-                  _textDontHaveAccount()
-                ],
-              ),
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              textComedorUtt(),
+              // loadingAnimation(),
+              imageBanner(),
+              textFieldUserCode(),
+              textFieldPassword(),
+              buttonLogin(),
+              textDontHaveAccount()
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _textComedorUtt() {
+  Widget textComedorUtt() {
     return Container(
       margin: const EdgeInsets.only(top: 25),
       child: Row(
@@ -93,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
   //   );
   // }
 
-  Widget _imageBanner() {
+  Widget imageBanner() {
     return Container(
       margin: EdgeInsets.only(
           top: 25, bottom: MediaQuery.of(context).size.height * 0.10),
@@ -105,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _textFieldUserCode() {
+  Widget textFieldUserCode() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 5),
       decoration: BoxDecoration(
@@ -127,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _textFieldPassword() {
+  Widget textFieldPassword() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 5),
       decoration: BoxDecoration(
@@ -150,7 +146,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _buttonLogin() {
+  Widget buttonLogin() {
     return Container(
       width: double.infinity,
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 30),
@@ -166,7 +162,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _textDontHaveAccount() {
+  Widget textDontHaveAccount() {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       child: Row(

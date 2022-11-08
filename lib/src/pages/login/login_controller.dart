@@ -4,7 +4,6 @@ import 'package:comedor_utt/src/models/response_api.dart';
 import 'package:comedor_utt/src/provider/users_provider.dart';
 import 'package:comedor_utt/src/utils/my_snackbar.dart';
 import 'package:comedor_utt/src/utils/shared_pref.dart';
-// ignore_for_file: use_build_context_synchronously
 
 class LoginController {
   BuildContext? context;
@@ -21,7 +20,8 @@ class LoginController {
     User user = User.fromJson(await sharedPref.read('user') ?? {});
 
     print('User Session Token: ${user.sessionToken}');
-
+    
+    // ignore_for_file: use_build_context_synchronously
     if (user.sessionToken != null) {
       print('USER LOGGED IN: ${user.toJson()}');
       if (user.roles.length > 1) {
@@ -43,8 +43,8 @@ class LoginController {
 
     print('Respuesta object: $responseApi');
 
-    if (responseApi!.success == true) {
-      User user = User.fromJson(responseApi.data);
+    if (responseApi?.success == true) {
+      User user = User.fromJson(responseApi?.data);
       sharedPref.save('user',
           user.toJson()); // Se almacena el usuario dentro del dispositivo
 
@@ -55,7 +55,7 @@ class LoginController {
         Navigator.pushNamedAndRemoveUntil(context!, user.roles[0]!.route, (route) => false);
       }
     } else {
-      MySnackBar.show(context!, '${responseApi.message}');
+      MySnackBar.show(context!, '${responseApi?.message}');
     }
   }
 }

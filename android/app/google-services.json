@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "998193424619",
+    "project_id": "comedor-utt",
+    "storage_bucket": "comedor-utt.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:998193424619:android:38efa3d357bdfc079336ae",
+        "android_client_info": {
+          "package_name": "com.example.comedor_utt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "998193424619-m2gkbfof9ldi3jttpjkjfnsrkurof1j4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.comedor_utt",
+            "certificate_hash": "c24040a0e3795930404409507c15c5a82ff76995"
+          }
+        },
+        {
+          "client_id": "998193424619-1j267l0ek67emjtc1qgfv78tad7p4pmv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHyV7jeAeOMkHnKFbB00P4qHE8u6xQvTc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "998193424619-1j267l0ek67emjtc1qgfv78tad7p4pmv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
