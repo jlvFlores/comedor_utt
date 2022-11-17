@@ -15,12 +15,12 @@ class User {
   List<Rol?> roles = [];
 
   User({
-    required this.id,
-    required this.email,
-    required this.userCode,
-    required this.name,
-    required this.password,
-    required this.sessionToken,
+    this.id,
+    this.email,
+    this.userCode,
+    this.name,
+    this.password,
+    this.sessionToken,
     required this.roles,
   });
 

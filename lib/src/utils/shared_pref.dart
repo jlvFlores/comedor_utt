@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:comedor_utt/src/provider/users_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -27,10 +28,12 @@ class SharedPref {
     return await prefs.remove(key);
   }
 
-  void logout(BuildContext context) async {
+  void logout(BuildContext context, String idUser) async {
+    UsersProvider usersProvider = UsersProvider();
+    usersProvider.init(context);
+    await usersProvider.logout(idUser);
     await remove('user');
-    
-    // ignore: use_build_context_synchronously
+    if (!context.mounted) return;
     Navigator.pushNamedAndRemoveUntil(context, 'login', (route) => false);
   }
 }

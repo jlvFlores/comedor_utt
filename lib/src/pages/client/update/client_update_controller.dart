@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:comedor_utt/src/utils/my_snackbar.dart';
 import 'package:comedor_utt/src/utils/shared_pref.dart';
 import 'package:comedor_utt/src/models/response_api.dart';
 import 'package:comedor_utt/src/models/user.dart';
@@ -22,11 +21,13 @@ class ClientUpdateController {
 
   Future? init(BuildContext context) async {
     this.context = context;
-    usersProvider.init(context);
+    
     user = User.fromJson(await sharedPref.read('user'));
+    if (!context.mounted) return;
+    usersProvider.init(context, sessionUser: user);
+    
     nameController.text = user.name!;
     emailController.text = user.email!;
-    return null;
   }
 
   void update() async {
@@ -34,7 +35,7 @@ class ClientUpdateController {
     String email = emailController.text.trim();
 
     if (name.isEmpty || email.isEmpty) {
-      MySnackBar.show(context!, 'Debes ingresar todos los campos');
+      Fluttertoast.showToast(msg: 'Debes ingresar todos los campos');
       return;
     }
 
@@ -49,7 +50,11 @@ class ClientUpdateController {
     );
 
     ResponseApi? responseApi = await usersProvider.update(myUser);
-    Fluttertoast.showToast(msg: '${responseApi?.message}');
+    if (responseApi?.message == null) { // FIGURE OUT WHY MESSAGE RETURNS NULL WHEN SESSION EXPIRES
+      Fluttertoast.showToast(msg: 'Tu session expiro');
+    } else {
+      Fluttertoast.showToast(msg: '${responseApi?.message}');
+    }
 
     if (responseApi?.success == true) {
       user = (await usersProvider.getById(myUser.id!))!; // OBTENIENDO EL USUARIO DE LA DB

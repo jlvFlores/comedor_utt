@@ -110,7 +110,7 @@ class _RegisterPageState extends State<RegisterPage> {
         controller: con.userCodeController,
         // keyboardType: TextInputType.text,
         decoration: const InputDecoration(
-            hintText: 'Matricula',
+            hintText: 'Matricula/No. Empleado',
             hintStyle: TextStyle(color: MyColors.primaryColorDark),
             border: InputBorder.none,
             contentPadding: EdgeInsets.all(15),

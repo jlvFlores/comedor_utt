@@ -17,7 +17,7 @@ class AdminOrdersListController {
   }
 
   void logout() {
-    sharedPref.logout(context!);
+    sharedPref.logout(context!, user!.id!);
   }
 
   void openDrawer() {
