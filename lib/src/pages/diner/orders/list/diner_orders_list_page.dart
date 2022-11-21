@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:comedor_utt/src/utils/my_colors.dart';
-import 'package:comedor_utt/src/pages/admin/orders/list/admin_orders_list_controller.dart';
+import 'package:comedor_utt/src/pages/diner/orders/list/diner_orders_list_controller.dart';
 
-class AdminOrdersListPage extends StatefulWidget {
-  const AdminOrdersListPage({super.key});
+class DinerOrdersListPage extends StatefulWidget {
+  const DinerOrdersListPage({super.key});
 
   @override
-  State<AdminOrdersListPage> createState() => _AdminOrdersListPageState();
+  State<DinerOrdersListPage> createState() => _DinerOrdersListPageState();
 }
 
-class _AdminOrdersListPageState extends State<AdminOrdersListPage> {
-  AdminOrdersListController con = AdminOrdersListController();
+class _DinerOrdersListPageState extends State<DinerOrdersListPage> {
+
+  DinerOrdersListController con = DinerOrdersListController();
 
   @override
   void initState() {
@@ -32,7 +33,7 @@ class _AdminOrdersListPageState extends State<AdminOrdersListPage> {
       drawer: drawer(),
       body: const Center(
         child: Text(
-          'Admin Page'
+          'Comedor'
         )
       )
     );
@@ -89,6 +90,16 @@ class _AdminOrdersListPageState extends State<AdminOrdersListPage> {
                 )
               ],
             )),
+          ListTile(
+            onTap: con.goToCategoryCreate,
+            title: const Text('Crear categoria'),
+            trailing: const Icon(Icons.list_alt),
+          ),
+          ListTile(
+            onTap: con.goToProductCreate,
+            title: const Text('Crear producto'),
+            trailing: const Icon(Icons.local_pizza),
+          ),
           con.user != null ? 
           con.user!.roles.length > 1 ?
           ListTile(

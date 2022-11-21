@@ -5,7 +5,9 @@ import 'package:comedor_utt/src/pages/register/register_page.dart';
 import 'package:comedor_utt/src/pages/roles/roles_page.dart';
 import 'package:comedor_utt/src/pages/client/products/list/client_products_list_page.dart';
 import 'package:comedor_utt/src/pages/client/update/client_update_page.dart';
-import 'package:comedor_utt/src/pages/admin/orders/list/admin_orders_list_page.dart';
+import 'package:comedor_utt/src/pages/diner/orders/list/diner_orders_list_page.dart';
+import 'package:comedor_utt/src/pages/diner/categories/create/diner_categories_create_page.dart';
+import 'package:comedor_utt/src/pages/diner/products/create/diner_products_create_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,7 +33,9 @@ class _MyAppState extends State<MyApp> {
         'roles': (BuildContext context) => const RolesPage(),
         'client/products/list': (BuildContext context) => const ClientProductsListPage(),
         'client/update': (BuildContext context) => const ClientUpdatePage(),
-        'admin/orders/list': (BuildContext context) => const AdminOrdersListPage(),
+        'diner/orders/list': (BuildContext context) => const DinerOrdersListPage(),
+        'diner/categories/create': (BuildContext context) => const DinerCategoriesCreatePage(),
+        'diner/products/create': (BuildContext context) => const DinerProductsCreatePage()
       },
       theme: ThemeData(
         // fontFamily: 'Roboto',

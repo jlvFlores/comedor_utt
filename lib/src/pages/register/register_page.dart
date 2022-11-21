@@ -100,7 +100,8 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
     );
   }
-    Widget textFieldUserCode() {
+  
+  Widget textFieldUserCode() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 5),
       decoration: BoxDecoration(
@@ -121,7 +122,8 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
     );
   }
-    Widget textFieldName() {
+  
+  Widget textFieldName() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 5),
       decoration: BoxDecoration(

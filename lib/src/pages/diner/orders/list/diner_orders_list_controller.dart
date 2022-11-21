@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:comedor_utt/src/models/user.dart';
 import 'package:comedor_utt/src/utils/shared_pref.dart';
 
-class AdminOrdersListController {
+class DinerOrdersListController {
   BuildContext? context;
   SharedPref sharedPref = SharedPref();
   GlobalKey<ScaffoldState> key = GlobalKey<ScaffoldState>();
@@ -18,6 +18,14 @@ class AdminOrdersListController {
 
   void logout() {
     sharedPref.logout(context!, user!.id!);
+  }
+
+  void goToCategoryCreate() {
+    Navigator.pushNamed(context!, 'diner/categories/create');
+  }
+
+  void goToProductCreate() {
+    Navigator.pushNamed(context!, 'diner/products/create');
   }
 
   void openDrawer() {

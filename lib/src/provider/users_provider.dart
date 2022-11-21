@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:comedor_utt/src/api/enviroment.dart';
+import 'package:comedor_utt/src/api/environment.dart';
 import 'package:comedor_utt/src/models/response_api.dart';
 import 'package:comedor_utt/src/models/user.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -9,7 +9,7 @@ import 'package:comedor_utt/src/utils/shared_pref.dart';
 import 'package:http/http.dart' as http;
 
 class UsersProvider {
-  final String _url = Enviroment.API_DELIVERY;
+  final String _url = Environment.API_DELIVERY;
   final String _api = '/api/users';
 
   BuildContext? context;

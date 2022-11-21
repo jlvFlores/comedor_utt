@@ -32,12 +32,14 @@ dependencies:
   flutter:
     sdk: flutter
 
-  lottie: ^1.4.3
+  lottie: ^2.0.0
   http: ^0.13.5
   shared_preferences: ^2.0.15
+  image_picker: ^0.7.5+3
   fluttertoast: ^8.1.1
+  flutter_masked_text2: ^0.9.1
+  path: ^1.8.2
   # sn_progress_dialog: ^1.0.8
-  # image_picker: ^0.8.6
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
