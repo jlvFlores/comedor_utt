@@ -4,7 +4,7 @@ import 'package:comedor_utt/src/pages/register/register_controller.dart';
 import 'package:comedor_utt/src/utils/my_colors.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+  const RegisterPage({Key key}) : super(key: key);
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -32,6 +32,9 @@ class _RegisterPageState extends State<RegisterPage> {
             SingleChildScrollView(
               child: Column(
                 children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
                   textRegister(),
                   imageUser(),
                   textFieldEmail(),
@@ -40,13 +43,27 @@ class _RegisterPageState extends State<RegisterPage> {
                   textFieldPassword(),
                   textFieldConfirmPassword(),
                   buttonRegister(),
-                  textBack(),
                 ],
               ),
+            ),
+            Positioned(
+              top: 30,
+              left: 10,
+              child: iconBack(),
             ),
           ],
         ),
       )
+    );
+  }
+
+  Widget iconBack() {
+    return IconButton(
+        onPressed: con.back,
+        icon: const Icon(
+          Icons.arrow_back_ios,
+          color: MyColors.primaryColor
+        )
     );
   }
 
@@ -203,25 +220,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
             padding: const EdgeInsets.symmetric(vertical: 15)),
         child: const Text('Registrarse'),
-      ),
-    );
-  }
-
-  Widget textBack() {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          GestureDetector(
-            onTap: con.back,
-            child: const Text(
-              'Regresar',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, color: MyColors.primaryColor),
-            ),
-          )
-        ],
       ),
     );
   }

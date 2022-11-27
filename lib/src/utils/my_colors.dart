@@ -6,4 +6,5 @@ class MyColors {
   static const Color primaryOpacityColor = Color.fromRGBO(247, 108, 0, .1);
   static const Color secondaryColor = Color(0xFF0E7A40);
   static const Color secondaryOpacityColor = Color.fromRGBO(14, 122, 64, .1);
+  static const Color grey300 = Color.fromRGBO(224, 224, 224, 1);
 }

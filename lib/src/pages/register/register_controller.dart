@@ -5,7 +5,7 @@ import 'package:comedor_utt/src/models/user.dart';
 import 'package:comedor_utt/src/provider/users_provider.dart';
 
 class RegisterController {
-  BuildContext? context;
+  BuildContext context;
   TextEditingController emailController = TextEditingController();
   TextEditingController userCodeController = TextEditingController();
   TextEditingController nameController = TextEditingController();
@@ -14,7 +14,7 @@ class RegisterController {
 
   UsersProvider usersProvider = UsersProvider();
 
-  Future? init(BuildContext context) {
+  Future init(BuildContext context) {
     this.context = context;
     usersProvider.init(context);
     return null;
@@ -32,17 +32,17 @@ class RegisterController {
         name.isEmpty ||
         password.isEmpty ||
         confirmPassword.isEmpty) {
-      MySnackBar.show(context!, 'Debes ingresar todos los campos');
+      MySnackBar.show(context, 'Debes ingresar todos los campos');
       return;
     }
 
     if (confirmPassword != password) {
-      MySnackBar.show(context!, 'Las contraseñas no coinciden');
+      MySnackBar.show(context, 'Las contraseñas no coinciden');
       return;
     }
 
     if (password.length < 6) {
-      MySnackBar.show(context!, 'Contraseña debe tener al menos 6 caracteres');
+      MySnackBar.show(context, 'Contraseña debe tener al menos 6 caracteres');
       return;
     }
 
@@ -56,13 +56,14 @@ class RegisterController {
         roles: []
     );
 
-    ResponseApi? responseApi = await usersProvider.create(user);
+    ResponseApi responseApi = await usersProvider.create(user);
 
-    MySnackBar.show(context!, '${responseApi?.message}');
+    if (!context.mounted) return;
+    MySnackBar.show(context, responseApi.message);
 
     if (responseApi?.success == true) {
       Future.delayed(const Duration(seconds: 2), () {
-        Navigator.pushReplacementNamed(context!, 'login');
+        Navigator.pushReplacementNamed(context, 'login');
       });
     }
 
@@ -75,6 +76,6 @@ class RegisterController {
   }
 
   void back() {
-    Navigator.pop(context!);
+    Navigator.pop(context);
   }
 }

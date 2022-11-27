@@ -10,24 +10,24 @@ import 'package:fluttertoast/fluttertoast.dart';
 // add it's string in update function, verify if empty, and change myUser fields 
 
 class ClientUpdateController {
-  BuildContext? context;
+  BuildContext context;
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
 
   UsersProvider usersProvider = UsersProvider();
 
-  late User user;
+  User user;
   SharedPref sharedPref = SharedPref();
 
-  Future? init(BuildContext context) async {
+  Future init(BuildContext context) async {
     this.context = context;
     
     user = User.fromJson(await sharedPref.read('user'));
     if (!context.mounted) return;
     usersProvider.init(context, sessionUser: user);
     
-    nameController.text = user.name!;
-    emailController.text = user.email!;
+    nameController.text = user.name;
+    emailController.text = user.email;
   }
 
   void update() async {
@@ -49,22 +49,23 @@ class ClientUpdateController {
         roles: user.roles
     );
 
-    ResponseApi? responseApi = await usersProvider.update(myUser);
+    ResponseApi responseApi = await usersProvider.update(myUser);
     if (responseApi?.message == null) { // FIGURE OUT WHY MESSAGE RETURNS NULL WHEN SESSION EXPIRES
       Fluttertoast.showToast(msg: 'Tu session expiro');
     } else {
-      Fluttertoast.showToast(msg: '${responseApi?.message}');
+      Fluttertoast.showToast(msg: responseApi?.message);
     }
 
     if (responseApi?.success == true) {
-      user = (await usersProvider.getById(myUser.id!))!; // OBTENIENDO EL USUARIO DE LA DB
+      user = (await usersProvider.getById(myUser.id)); // OBTENIENDO EL USUARIO DE LA DB
       print('Usuario obtenido: ${user.toJson()}');
       sharedPref.save('user', user.toJson());
-      Navigator.pushNamedAndRemoveUntil(context!, 'client/products/list', (route) => false);
+      if (!context.mounted) return;
+      Navigator.pushNamedAndRemoveUntil(context, 'client/products/list', (route) => false);
     }
   }
 
   void back() {
-    Navigator.pop(context!);
+    Navigator.pop(context);
   }
 }

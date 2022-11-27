@@ -7,7 +7,7 @@ import 'package:comedor_utt/src/pages/diner/products/create/diner_products_creat
 import 'package:comedor_utt/src/utils/my_colors.dart';
 
 class DinerProductsCreatePage extends StatefulWidget {
-  const DinerProductsCreatePage({super.key});
+  const DinerProductsCreatePage({Key key}) : super(key: key);
 
   @override
   State<DinerProductsCreatePage> createState() => _DinerProductsCreatePageState();
@@ -37,16 +37,14 @@ class _DinerProductsCreatePageState extends State<DinerProductsCreatePage> {
           const SizedBox(height: 30),
           textFieldName(),
           textFieldDescripcion(),
-          textFieldPrice(),
           Container(
             height: 100,
             margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                textFieldPrice(),
                 cardImage(con.imageFile1, 1),
-                cardImage(con.imageFile2, 2),
-                cardImage(con.imageFile3, 3),
               ],
             ),
           ),
@@ -111,8 +109,7 @@ class _DinerProductsCreatePageState extends State<DinerProductsCreatePage> {
 
   Widget textFieldPrice() {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
-      padding: const EdgeInsets.symmetric(horizontal: 10),
+      width: 150,
       decoration: BoxDecoration(
         color: MyColors.primaryOpacityColor,
         borderRadius: BorderRadius.circular(30)
@@ -135,7 +132,7 @@ class _DinerProductsCreatePageState extends State<DinerProductsCreatePage> {
     );
   }
 
-  Widget cardImage(File? imageFile, int numberFile) {
+  Widget cardImage(File imageFile, int numberFile) {
     return GestureDetector(
       onTap: () {
         con.showAlertDialog(numberFile);
@@ -144,7 +141,7 @@ class _DinerProductsCreatePageState extends State<DinerProductsCreatePage> {
       ? Card(
         elevation: 3.0,
         child: SizedBox(
-          height: 140,
+          height: 100,
           width: MediaQuery.of(context).size.width * 0.25,
           child: Image.file(
             imageFile,
@@ -155,10 +152,10 @@ class _DinerProductsCreatePageState extends State<DinerProductsCreatePage> {
       : Card(
         elevation: 3.0,
         child: SizedBox(
-          height: 140,
+          height: 100,
           width: MediaQuery.of(context).size.width * 0.25,
           child: const Image (
-            image: AssetImage('assets/img/add_image.png')
+            image: AssetImage('assets/img/add-image-placeholder.png')
           )
         )
       ),
@@ -233,7 +230,7 @@ class _DinerProductsCreatePageState extends State<DinerProductsCreatePage> {
     for (var category in categories) {
       list.add(DropdownMenuItem(
         value: category.id,
-        child: Text('${category.name}')
+        child: Text(category.name)
       ));
     }
 

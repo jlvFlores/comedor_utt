@@ -15,7 +15,7 @@ class SharedPref {
 
     if (prefs.getString(key) == null) return null;
 
-    return await json.decode('${prefs.getString(key)}');
+    return await json.decode(prefs.getString(key));
   }
 
   Future<bool> contains(String key) async {

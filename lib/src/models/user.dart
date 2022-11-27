@@ -6,13 +6,13 @@ User userFromJson(String str) => User.fromJson(json.decode(str));
 String userToJson(User data) => json.encode(data.toJson());
 
 class User {
-  String? id;
-  String? email;
-  String? userCode;
-  String? name;
-  String? password;
-  String? sessionToken;
-  List<Rol?> roles = [];
+  String id;
+  String email;
+  String userCode;
+  String name;
+  String password;
+  String sessionToken;
+  List<Rol> roles = [];
 
   User({
     this.id,
@@ -21,7 +21,7 @@ class User {
     this.name,
     this.password,
     this.sessionToken,
-    required this.roles,
+    this.roles,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(

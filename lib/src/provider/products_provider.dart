@@ -12,12 +12,12 @@ import 'package:path/path.dart';
 
 class ProductsProvider {
 
-  final String _url = Environment.API_DELIVERY;
+  final String _url = Environment.apiDelivery;
   final String _api = '/api/products';
-  BuildContext? context;
-  User? sessionUser;
+  BuildContext context;
+  User sessionUser;
 
-  Future? init(BuildContext context, User sessionUser) {
+  Future init(BuildContext context, User sessionUser) {
     this.context = context;
     this.sessionUser = sessionUser;
     return null;
@@ -28,13 +28,14 @@ class ProductsProvider {
       Uri url = Uri.http(_url, '$_api/findByCategory/$idCategory');
       Map<String, String> headers = {
         'Content-type': 'application/json',
-        'Authorization': '${sessionUser!.sessionToken}'
+        'Authorization': sessionUser.sessionToken
       };
       final res = await http.get(url, headers: headers);
 
       if (res.statusCode == 401) {
         Fluttertoast.showToast(msg: 'Sesion expirada');
-        SharedPref().logout(context!, '${sessionUser!.id}');
+        if (!context.mounted) return null;
+        SharedPref().logout(context, sessionUser.id);
       }
       final data = json.decode(res.body); // CATEGORIAS
       Product product = Product.fromJsonList(data);
@@ -51,13 +52,14 @@ class ProductsProvider {
       Uri url = Uri.http(_url, '$_api/findByCategoryAndProductName/$idCategory/$productName');
       Map<String, String> headers = {
         'Content-type': 'application/json',
-        'Authorization': '${sessionUser!.sessionToken}'
+        'Authorization': sessionUser.sessionToken
       };
       final res = await http.get(url, headers: headers);
 
       if (res.statusCode == 401) {
         Fluttertoast.showToast(msg: 'Sesion expirada');
-        SharedPref().logout(context!, '${sessionUser!.id}');
+        if (!context.mounted) return null;
+        SharedPref().logout(context, sessionUser.id);
       }
       final data = json.decode(res.body); // CATEGORIAS
       Product product = Product.fromJsonList(data);
@@ -69,11 +71,11 @@ class ProductsProvider {
     }
   }
 
-  Future<Stream?> create(Product product, List<File> images) async {
+  Future<Stream> create(Product product, List<File> images) async {
     try {
       Uri url = Uri.http(_url, '$_api/create');
       final request = http.MultipartRequest('POST', url);
-      request.headers['Authorization'] = '${sessionUser!.sessionToken}';
+      request.headers['Authorization'] = sessionUser.sessionToken;
 
       for (int i = 0; i < images.length; i++) {
         request.files.add(http.MultipartFile(

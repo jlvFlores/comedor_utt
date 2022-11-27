@@ -15,8 +15,8 @@ import 'package:image_picker/image_picker.dart';
 
 class DinerProductsCreateController {
   
-  BuildContext? context;
-  Function? refresh;
+  BuildContext context;
+  Function refresh;
 
   TextEditingController nameController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
@@ -26,32 +26,30 @@ class DinerProductsCreateController {
   ProductsProvider productsProvider = ProductsProvider();
   // ImagePicker imagePicker = ImagePicker();
 
-  User? user;
+  User user;
   SharedPref sharedPref = SharedPref();
 
   List<Category> categories = [];
-  String? idCategory; // ALAMCENAR EL ID DE LA CATEGORIA SELCCIONADA
+  String idCategory; // ALAMCENAR EL ID DE LA CATEGORIA SELCCIONADA
 
   // IMAGENES
-  PickedFile? pickedFile;
-  File? imageFile1;
-  File? imageFile2;
-  File? imageFile3;
+  PickedFile pickedFile;
+  File imageFile1;
 
-  Future? init(BuildContext context, Function refresh) async {
+  Future init(BuildContext context, Function refresh) async {
     this.context = context;
     this.refresh = refresh;
     user = User.fromJson(await sharedPref.read('user'));
 
     if (!context.mounted) return;
-    categoriesProvider.init(context, user!);
-    productsProvider.init(context, user!);
+    categoriesProvider.init(context, user);
+    productsProvider.init(context, user);
     getCategories();
   }
 
   void getCategories() async {
     categories = await categoriesProvider.getAll();
-    refresh!();
+    refresh();
   }
 
   void createProduct() async {
@@ -60,36 +58,35 @@ class DinerProductsCreateController {
     double price = priceController.numberValue;
 
     if (name.isEmpty || description.isEmpty || price == 0) {
-      MySnackBar.show(context!, 'Debe ingresar todos los datos');
+      MySnackBar.show(context, 'Debe ingresar todos los datos');
       return;
     }
 
-    if (imageFile1 == null || imageFile2 == null || imageFile3 == null) {
-      MySnackBar.show(context!, 'Selecciona las tres imagenes');
+    if (imageFile1 == null) {
+      MySnackBar.show(context, 'Selecciona una imagene');
       return;
     }
 
     if (idCategory == null) {
-      MySnackBar.show(context!, 'Selecciona la categoria del producto');
+      MySnackBar.show(context, 'Selecciona la categoria del producto');
       return;
     }
 
     Product product = Product(
       name: name,
       description: description,
+      image1: '',
       price: price,
-      idCategory: int.parse(idCategory!)
+      idCategory: int.parse(idCategory)
     );
 
     List<File> images = [];
-    images.add(imageFile1!);
-    images.add(imageFile2!);
-    images.add(imageFile3!);
+    images.add(imageFile1);
 
-    Stream? stream = await productsProvider.create(product, images);
+    Stream stream = await productsProvider.create(product, images);
     stream?.listen((res) {
       ResponseApi responseApi = ResponseApi.fromJson(json.decode(res));
-      MySnackBar.show(context!, '${responseApi.message}');
+      MySnackBar.show(context, responseApi.message);
 
       if (responseApi.success == true) {
         resetValues();
@@ -104,10 +101,8 @@ class DinerProductsCreateController {
     descriptionController.text = '';
     priceController.text = '0.0';
     imageFile1 = null;
-    imageFile2 = null;
-    imageFile3 = null;
     idCategory = null;
-    refresh!();
+    refresh();
   }
 
   Future selectImage(ImageSource imageSource, int fileNumber) async {
@@ -116,15 +111,12 @@ class DinerProductsCreateController {
     pickedFile = await ImagePicker().getImage(source: imageSource);
     if (pickedFile != null) {
       if (fileNumber == 1) {
-        imageFile1 = File(pickedFile!.path);
-      } else if (fileNumber == 2) {
-        imageFile2 = File(pickedFile!.path);
-      } else if (fileNumber == 3) {
-        imageFile3 = File(pickedFile!.path);
+        imageFile1 = File(pickedFile.path);
       }
     }
-    Navigator.pop(context!);
-    refresh!();
+    if (!context.mounted) return;
+    Navigator.pop(context);
+    refresh();
   }
 
   void showAlertDialog(int fileNumber) {
@@ -146,7 +138,7 @@ class DinerProductsCreateController {
     );
 
     showDialog(
-      context: context!,
+      context: context,
       builder: (BuildContext context) {
         return alertDialog;
       }

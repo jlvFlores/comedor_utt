@@ -3,13 +3,13 @@ import 'package:comedor_utt/src/models/user.dart';
 import 'package:comedor_utt/src/utils/shared_pref.dart';
 
 class RolesController {
-  BuildContext? context;
-  Function? refresh;
+  BuildContext context;
+  Function refresh;
 
-  User? user;
+  User user;
   SharedPref sharedPref = SharedPref();
 
-  Future? init(BuildContext context, Function refresh) async {
+  Future init(BuildContext context, Function refresh) async {
     this.context = context;
     this.refresh = refresh;
 
@@ -18,6 +18,6 @@ class RolesController {
   }
 
   void goToPage(String route) {
-    Navigator.pushNamedAndRemoveUntil(context!, route, (route) => false);
+    Navigator.pushNamedAndRemoveUntil(context, route, (route) => false);
   }
 }

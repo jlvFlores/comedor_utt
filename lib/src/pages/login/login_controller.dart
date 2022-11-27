@@ -6,7 +6,7 @@ import 'package:comedor_utt/src/utils/my_snackbar.dart';
 import 'package:comedor_utt/src/utils/shared_pref.dart';
 
 class LoginController {
-  BuildContext? context;
+  BuildContext context;
   TextEditingController userCodeController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -27,19 +27,19 @@ class LoginController {
       if (user.roles.length > 1) {
         Navigator.pushNamedAndRemoveUntil(context, 'roles', (route) => false);
       } else {
-        Navigator.pushNamedAndRemoveUntil(context, user.roles[0]!.route, (route) => false);
+        Navigator.pushNamedAndRemoveUntil(context, user.roles[0].route, (route) => false);
       }
     }
   }
 
   void goToRegisterPage() {
-    Navigator.pushNamed(context!, 'register');
+    Navigator.pushNamed(context, 'register');
   }
 
   void login() async {
     String userCode = userCodeController.text.trim();
     String password = passwordController.text.trim();
-    ResponseApi? responseApi = await usersProvider.login(userCode, password);
+    ResponseApi responseApi = await usersProvider.login(userCode, password);
 
     print('Respuesta object: $responseApi');
 
@@ -50,12 +50,12 @@ class LoginController {
 
       print('USER LOGGED IN: ${user.toJson()}');
       if (user.roles.length > 1) {
-        Navigator.pushNamedAndRemoveUntil(context!, 'roles', (route) => false);
+        Navigator.pushNamedAndRemoveUntil(context, 'roles', (route) => false);
       } else {
-        Navigator.pushNamedAndRemoveUntil(context!, user.roles[0]!.route, (route) => false);
+        Navigator.pushNamedAndRemoveUntil(context, user.roles[0].route, (route) => false);
       }
     } else {
-      MySnackBar.show(context!, '${responseApi?.message}');
+      MySnackBar.show(context, responseApi?.message);
     }
   }
 }

@@ -4,7 +4,7 @@ import 'package:comedor_utt/src/utils/my_colors.dart';
 import 'package:comedor_utt/src/pages/diner/orders/list/diner_orders_list_controller.dart';
 
 class DinerOrdersListPage extends StatefulWidget {
-  const DinerOrdersListPage({super.key});
+  const DinerOrdersListPage({Key key}) : super(key: key);
 
   @override
   State<DinerOrdersListPage> createState() => _DinerOrdersListPageState();
@@ -101,7 +101,7 @@ class _DinerOrdersListPageState extends State<DinerOrdersListPage> {
             trailing: const Icon(Icons.local_pizza),
           ),
           con.user != null ? 
-          con.user!.roles.length > 1 ?
+          con.user.roles.length > 1 ?
           ListTile(
             onTap: con.goToRoles,
             title: const Text('Seleccionar rol'),

@@ -5,7 +5,7 @@ import 'package:comedor_utt/src/utils/my_colors.dart';
 // import 'package:lottie/lottie.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  const LoginPage({Key key}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();

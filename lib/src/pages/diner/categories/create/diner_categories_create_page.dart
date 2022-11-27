@@ -4,7 +4,7 @@ import 'package:comedor_utt/src/utils/my_colors.dart';
 import 'package:flutter/scheduler.dart';
 
 class DinerCategoriesCreatePage extends StatefulWidget {
-  const DinerCategoriesCreatePage({super.key});
+  const DinerCategoriesCreatePage({Key key}) : super(key: key);
 
   @override
   State<DinerCategoriesCreatePage> createState() => _DinerCategoriesCreatePageState();

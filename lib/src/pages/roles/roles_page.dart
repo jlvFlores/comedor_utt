@@ -5,7 +5,7 @@ import 'package:comedor_utt/src/pages/roles/roles_controller.dart';
 import 'package:flutter/scheduler.dart';
 
 class RolesPage extends StatefulWidget {
-  const RolesPage({super.key});
+  const RolesPage({Key key}) : super(key: key);
 
   @override
   State<RolesPage> createState() => _RolesPageState();
@@ -26,17 +26,19 @@ class _RolesPageState extends State<RolesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('Selecciona un rol')),
-        body: Container(
-          margin:
-              EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.14),
-          child: ListView(
-              children: con.user != null
-                  ? con.user!.roles.map((rol) {
-                      return cardRol(rol!);
-                    }).toList()
-                  : []),
-        ));
+      appBar: AppBar(
+        title: const Text('Selecciona un rol')
+      ),
+      body: Container(
+        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.12),
+        child: ListView(
+          children: con.user != null
+            ? con.user.roles.map((rol) {
+              return cardRol(rol);
+            }).toList() : []
+          ),
+        )
+      );
   }
 
   Widget cardRol(Rol rol) {
@@ -47,20 +49,22 @@ class _RolesPageState extends State<RolesPage> {
       child: Column(
         children: [
           SizedBox(
-            height: 100,
-            child: FadeInImage.assetNetwork(
-              image: rol.image,
+            height: 150,
+            child: FadeInImage(
+              image: rol?.image != null
+              ? NetworkImage(rol.image)
+              : const AssetImage('assets/img/no-image.png'),
               fit: BoxFit.contain,
               fadeInDuration: const Duration(milliseconds: 50),
-              placeholder: 'assets/img/no-image.png',
+              placeholder: const AssetImage('assets/img/no-image.png'),
             ),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 5),
           Text(
             rol.name,
             style: const TextStyle(fontSize: 16, color: MyColors.primaryColor),
           ),
-          const SizedBox(height: 25),
+          const SizedBox(height: 30),
         ],
       ),
     );
