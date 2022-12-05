@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:comedor_utt/src/models/user.dart';
 import 'package:comedor_utt/src/pages/client/orders/detail/client_orders_detail_page.dart';
@@ -24,7 +26,7 @@ class ClientOrdersListController {
     this.refresh = refresh;
     user = User.fromJson(await sharedPref.read('user'));
 
-    if (!context.mounted) return;
+    // if (!context.mounted) return;
     ordersProvider.init(context, user);
     refresh();
   }

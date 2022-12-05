@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:comedor_utt/src/utils/shared_pref.dart';
 import 'package:comedor_utt/src/models/response_api.dart';
@@ -23,7 +25,7 @@ class ClientUpdateController {
     this.context = context;
     
     user = User.fromJson(await sharedPref.read('user'));
-    if (!context.mounted) return;
+    // if (!context.mounted) return;
     usersProvider.init(context, sessionUser: user);
     
     nameController.text = user.name;
@@ -60,7 +62,7 @@ class ClientUpdateController {
       user = (await usersProvider.getById(myUser.id)); // OBTENIENDO EL USUARIO DE LA DB
       print('Usuario obtenido: ${user.toJson()}');
       sharedPref.save('user', user.toJson());
-      if (!context.mounted) return;
+      // if (!context.mounted) return;
       Navigator.pushNamedAndRemoveUntil(context, 'client/products/list', (route) => false);
     }
   }

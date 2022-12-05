@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:comedor_utt/src/utils/my_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:comedor_utt/src/models/response_api.dart';
@@ -58,7 +60,7 @@ class RegisterController {
 
     ResponseApi responseApi = await usersProvider.create(user);
 
-    if (!context.mounted) return;
+    // if (!context.mounted) return;
     MySnackBar.show(context, responseApi.message);
 
     if (responseApi?.success == true) {

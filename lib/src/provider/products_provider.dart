@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 import 'dart:io';
 
@@ -33,7 +35,7 @@ class ProductsProvider {
 
       if (res.statusCode == 401) {
         Fluttertoast.showToast(msg: 'Sesion expirada');
-        if (!context.mounted) return null;
+        // if (!context.mounted) return null;
         SharedPref().logout(context, sessionUser.id);
       }
       final data = json.decode(res.body); // CATEGORIAS
@@ -57,7 +59,7 @@ class ProductsProvider {
 
       if (res.statusCode == 401) {
         Fluttertoast.showToast(msg: 'Sesion expirada');
-        if (!context.mounted) return null;
+        // if (!context.mounted) return null;
         SharedPref().logout(context, sessionUser.id);
       }
       final data = json.decode(res.body); // CATEGORIAS

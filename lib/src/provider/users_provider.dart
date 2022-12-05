@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -31,7 +33,7 @@ class UsersProvider {
 
       if (res.statusCode == 401) { // No autorizado
         Fluttertoast.showToast(msg: 'Tu session expiro');
-        if (!context.mounted) return null;
+        // if (!context.mounted) return null;
         SharedPref().logout(context, sessionUser.id);
       }
 
@@ -55,7 +57,7 @@ class UsersProvider {
 
       if (res.statusCode == 401) { // NO AUTORIZADO
         Fluttertoast.showToast(msg: 'Tu sesion expiro');
-        if(!context.mounted) return null;
+        // if(!context.mounted) return null;
         SharedPref().logout(context, sessionUser.id);
       }
 
@@ -101,7 +103,7 @@ class UsersProvider {
 
       if (res.statusCode == 401) { // No autorizado
         Fluttertoast.showToast(msg: 'Tu session expiro');
-        if (!context.mounted) return null;
+        // if (!context.mounted) return null;
         SharedPref().logout(context, sessionUser.id);
       }
 

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 import 'dart:io';
 
@@ -41,7 +43,7 @@ class DinerProductsCreateController {
     this.refresh = refresh;
     user = User.fromJson(await sharedPref.read('user'));
 
-    if (!context.mounted) return;
+    // if (!context.mounted) return;
     categoriesProvider.init(context, user);
     productsProvider.init(context, user);
     getCategories();
@@ -114,7 +116,7 @@ class DinerProductsCreateController {
         imageFile1 = File(pickedFile.path);
       }
     }
-    if (!context.mounted) return;
+    // if (!context.mounted) return;
     Navigator.pop(context);
     refresh();
   }

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:comedor_utt/src/models/order.dart';
 import 'package:comedor_utt/src/pages/diner/orders/detail/diner_orders_detail_page.dart';
 import 'package:comedor_utt/src/provider/orders_provider.dart';
@@ -23,7 +25,7 @@ class DinerOrdersListController {
     this.refresh = refresh;
     user = User.fromJson(await sharedPref.read('user'));
 
-    if (!context.mounted) return null;
+    // if (!context.mounted) return null;
     ordersProvider.init(context, user);
 
     refresh();

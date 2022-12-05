@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:comedor_utt/src/models/response_api.dart';
 import 'package:comedor_utt/src/provider/orders_provider.dart';
 import 'package:comedor_utt/src/provider/push_notifications_provider.dart';
@@ -37,7 +39,7 @@ class ClientOrdersCreateController {
     selectedProducts = Product.fromJsonList(await sharedPref.read('order')).toList;
     user = User.fromJson(await sharedPref.read('user'));
 
-    if (!context.mounted) return;
+    // if (!context.mounted) return;
     usersProvider.init(context, sessionUser: user);
     ordersProvider.init(context, user);
 
@@ -111,7 +113,7 @@ class ClientOrdersCreateController {
     selectedProducts.length = 0;
     sharedPref.save('order', selectedProducts);
     
-    if (!context.mounted) return;
+    // if (!context.mounted) return;
     Navigator.pushNamedAndRemoveUntil(context, 'client/products/list', (route) => false);
   }
 }

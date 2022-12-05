@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -34,7 +36,7 @@ class ClientProductsListController {
     this.refresh = refresh;
     user = User.fromJson(await sharedPref.read('user'));
 
-    if (!context.mounted) return;
+    // if (!context.mounted) return;
     categoriesProvider.init(context, user);
     productsProvider.init(context, user);
 

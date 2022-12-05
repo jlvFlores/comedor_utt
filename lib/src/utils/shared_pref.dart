@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 
 import 'package:comedor_utt/src/provider/users_provider.dart';
@@ -33,7 +35,7 @@ class SharedPref {
     usersProvider.init(context);
     await usersProvider.logout(idUser);
     await remove('user');
-    if (!context.mounted) return;
+    // if (!context.mounted) return;
     Navigator.pushNamedAndRemoveUntil(context, 'login', (route) => false);
   }
 }

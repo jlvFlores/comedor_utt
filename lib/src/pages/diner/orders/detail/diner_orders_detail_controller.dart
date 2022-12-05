@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:comedor_utt/src/provider/push_notifications_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:comedor_utt/src/models/order.dart';
@@ -35,8 +37,7 @@ class DinerOrdersDetailController {
     
     user = User.fromJson(await sharedPref.read('user'));
     
-    if (!context.mounted) return null;
-    // usersProvider.init(context, sessionUser: user);
+    // if (!context.mounted) return null;
     ordersProvider.init(context, user);
 
     getTotal();
@@ -64,7 +65,7 @@ class DinerOrdersDetailController {
 
     Fluttertoast.showToast(msg: responseApi.message, toastLength: Toast.LENGTH_LONG);
     
-    if (!context.mounted) return;
+    // if (!context.mounted) return;
     Navigator.pop(context, true); // Closes the details page
   }
 

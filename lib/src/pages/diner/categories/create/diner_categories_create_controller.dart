@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:comedor_utt/src/models/user.dart';
 import 'package:comedor_utt/src/models/category.dart';
@@ -22,7 +24,7 @@ class DinerCategoriesCreateController {
     this.refresh = refresh;
     user = User.fromJson(await sharedPref.read('user'));
     
-    if (!context.mounted) return;
+    // if (!context.mounted) return;
     categoriesProvider.init(context, user);
   }
 
@@ -42,10 +44,10 @@ class DinerCategoriesCreateController {
     ResponseApi responseApi = await categoriesProvider.create(category);
     
     if (responseApi?.message == null) { // FIGURE OUT WHY MESSAGE RETURNS NULL WHEN SESSION EXPIRES
-      if (!context.mounted) return;
+      // if (!context.mounted) return;
       MySnackBar.show(context, 'Tu session expiro');
     } else {
-      if (!context.mounted) return;
+      // if (!context.mounted) return;
       MySnackBar.show(context, responseApi?.message);
     }
 
