@@ -55,7 +55,7 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
           borderRadius: BorderRadius.circular(30)),
       child: TextField(
         controller: con.nameController,
-        // keyboardType: TextInputType.text,
+        textCapitalization: TextCapitalization.words,
         decoration: const InputDecoration(
             hintText: 'Nombre',
             hintStyle: TextStyle(color: MyColors.primaryColorDark),

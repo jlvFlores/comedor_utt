@@ -6,7 +6,6 @@ import 'package:comedor_utt/src/models/product.dart';
 import 'package:comedor_utt/src/models/category.dart';
 import 'package:comedor_utt/src/provider/categories_provider.dart';
 import 'package:comedor_utt/src/provider/products_provider.dart';
-// import 'package:comedor_utt/src/provider/push_notifications_provider.dart';
 import 'package:comedor_utt/src/pages/client/products/detail/client_products_detail_page.dart';
 import 'package:comedor_utt/src/utils/shared_pref.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -21,7 +20,6 @@ class ClientProductsListController {
   
   CategoriesProvider categoriesProvider = CategoriesProvider();
   ProductsProvider productsProvider = ProductsProvider();
-  
   List<Category> categories = [];
 
   StreamController<String> streamController = StreamController();
@@ -30,8 +28,6 @@ class ClientProductsListController {
   Timer searchOnStoppedTyping;
 
   String productName = '';
-
-  // PushNotificationsProvider pushNotificationsProvider = PushNotificationsProvider();
 
   Future init(BuildContext context, Function refresh) async {
     this.context = context;
@@ -92,6 +88,10 @@ class ClientProductsListController {
 
   void goToUpdatePage() {
     Navigator.pushNamed(context, 'client/update');
+  }
+
+  void goToOrdersList() {
+    Navigator.pushNamed(context, 'client/orders/list');
   }
 
   void goToOrderCreatePage() {

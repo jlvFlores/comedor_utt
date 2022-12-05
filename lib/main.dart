@@ -1,16 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:comedor_utt/src/utils/my_colors.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:comedor_utt/src/pages/login/login_page.dart';
 import 'package:comedor_utt/src/pages/register/register_page.dart';
 import 'package:comedor_utt/src/pages/roles/roles_page.dart';
+import 'package:comedor_utt/src/pages/client/orders/create/client_orders_create_page.dart';
+import 'package:comedor_utt/src/pages/client/orders/list/client_orders_list_page.dart';
 import 'package:comedor_utt/src/pages/client/products/list/client_products_list_page.dart';
 import 'package:comedor_utt/src/pages/client/update/client_update_page.dart';
-import 'package:comedor_utt/src/pages/client/orders/create/client_orders_create_page.dart';
-import 'package:comedor_utt/src/pages/diner/orders/list/diner_orders_list_page.dart';
 import 'package:comedor_utt/src/pages/diner/categories/create/diner_categories_create_page.dart';
+import 'package:comedor_utt/src/pages/diner/orders/list/diner_orders_list_page.dart';
 import 'package:comedor_utt/src/pages/diner/products/create/diner_products_create_page.dart';
+import 'package:comedor_utt/src/provider/push_notifications_provider.dart';
+import 'package:comedor_utt/src/utils/my_colors.dart';
 
-void main() {
+
+PushNotificationsProvider pushNotificationsProvider = PushNotificationsProvider();
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+    // await pushNotificationsProvider.setupFlutterNotifications();
+    // pushNotificationsProvider.showFlutterNotification(message);
+    await Firebase.initializeApp();
+    print('Handling a background message ${message.messageId}');
+  }
+
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  pushNotificationsProvider.initPushNotifications();
   runApp(const MyApp());
 }
 
@@ -22,6 +41,16 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
+  GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
+  @override
+  void initState() {
+    super.initState();
+
+    pushNotificationsProvider.onMessageListener();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -32,11 +61,12 @@ class _MyAppState extends State<MyApp> {
         'login': (BuildContext context) => const LoginPage(),
         'register': (BuildContext context) => const RegisterPage(),
         'roles': (BuildContext context) => const RolesPage(),
+        'client/orders/create': (BuildContext context) => const ClientOrdersCreatePage(),
+        'client/orders/list' : (BuildContext context) => const ClientOrdersListPage(),
         'client/products/list': (BuildContext context) => const ClientProductsListPage(),
         'client/update': (BuildContext context) => const ClientUpdatePage(),
-        'client/orders/create': (BuildContext context) => const ClientOrdersCreatePage(),
-        'diner/orders/list': (BuildContext context) => const DinerOrdersListPage(),
         'diner/categories/create': (BuildContext context) => const DinerCategoriesCreatePage(),
+        'diner/orders/list': (BuildContext context) => const DinerOrdersListPage(),
         'diner/products/create': (BuildContext context) => const DinerProductsCreatePage()
       },
       theme: ThemeData(

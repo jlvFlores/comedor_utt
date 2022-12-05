@@ -63,7 +63,7 @@ class DinerProductsCreateController {
     }
 
     if (imageFile1 == null) {
-      MySnackBar.show(context, 'Selecciona una imagene');
+      MySnackBar.show(context, 'Selecciona una imagen');
       return;
     }
 

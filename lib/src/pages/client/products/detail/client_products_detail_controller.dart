@@ -47,6 +47,7 @@ class ClientProductsDetailController {
 
     sharedPref.save('order', selectedProducts);
     Fluttertoast.showToast(msg: 'Producto agregado');
+    close();
   }
 
   void addItem() {

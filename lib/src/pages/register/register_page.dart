@@ -89,7 +89,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return Container(
       margin: const EdgeInsets.only(top: 30, bottom: 15),
       child: CircleAvatar(
-        backgroundImage: const AssetImage('assets/img/user_profile_2.png'),
+        backgroundImage: const AssetImage('assets/img/user_profile.png'),
         radius: 60,
         backgroundColor: Colors.grey[200]
       ),
@@ -126,7 +126,7 @@ class _RegisterPageState extends State<RegisterPage> {
           borderRadius: BorderRadius.circular(30)),
       child: TextField(
         controller: con.userCodeController,
-        // keyboardType: TextInputType.text,
+        textCapitalization: TextCapitalization.characters,
         decoration: const InputDecoration(
             hintText: 'Matricula/No. Empleado',
             hintStyle: TextStyle(color: MyColors.primaryColorDark),
@@ -148,7 +148,7 @@ class _RegisterPageState extends State<RegisterPage> {
           borderRadius: BorderRadius.circular(30)),
       child: TextField(
         controller: con.nameController,
-        // keyboardType: TextInputType.text,
+        textCapitalization: TextCapitalization.words,
         decoration: const InputDecoration(
             hintText: 'Nombre',
             hintStyle: TextStyle(color: MyColors.primaryColorDark),
@@ -171,7 +171,6 @@ class _RegisterPageState extends State<RegisterPage> {
       child: TextField(
         controller: con.passwordController,
         obscureText: true,
-        // keyboardType: TextInputType.text,
         decoration: const InputDecoration(
             hintText: 'Contraseña',
             hintStyle: TextStyle(color: MyColors.primaryColorDark),
@@ -194,7 +193,6 @@ class _RegisterPageState extends State<RegisterPage> {
       child: TextField(
         controller: con.confirmPasswordController,
         obscureText: true,
-        // keyboardType: TextInputType.text,
         decoration: const InputDecoration(
             hintText: 'Confirma Contraseña',
             hintStyle: TextStyle(color: MyColors.primaryColorDark),

@@ -49,6 +49,7 @@ class _DinerCategoriesCreatePageState extends State<DinerCategoriesCreatePage> {
       ),
       child: TextField(
         controller: con.nameController,
+        textCapitalization: TextCapitalization.sentences,
         decoration: const InputDecoration(
           hintText: 'Nombre de la categoria',
           hintStyle: TextStyle(color: MyColors.primaryColorDark),
@@ -73,6 +74,7 @@ class _DinerCategoriesCreatePageState extends State<DinerCategoriesCreatePage> {
       ),
       child: TextField(
         controller: con.descriptionController,
+        textCapitalization: TextCapitalization.sentences,
         maxLines: 4,
         maxLength: 255,
         decoration: const InputDecoration(

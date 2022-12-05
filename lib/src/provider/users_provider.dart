@@ -44,6 +44,33 @@ class UsersProvider {
     }
   }
 
+    Future<List<String>> getAdminsNotificationTokens() async {
+    try {
+      Uri url = Uri.http(_url, '$_api/getAdminsNotificationTokens');
+      Map<String, String> headers = {
+        'Content-type': 'application/json',
+        'Authorization': sessionUser.sessionToken
+      };
+      final res = await http.get(url, headers: headers);
+
+      if (res.statusCode == 401) { // NO AUTORIZADO
+        Fluttertoast.showToast(msg: 'Tu sesion expiro');
+        if(!context.mounted) return null;
+        SharedPref().logout(context, sessionUser.id);
+      }
+
+      final data = json.decode(res.body);
+      final tokens = List<String>.from(data);
+
+      print('TOKENS DE ADMIN $tokens');
+      return tokens;
+    }
+    catch(e) {
+      print('Error: $e');
+      return null;
+    }
+  }
+
   Future<ResponseApi> create(User user) async {
     try {
       Uri url = Uri.http(_url, '$_api/create');

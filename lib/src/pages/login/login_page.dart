@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:comedor_utt/src/pages/login/login_controller.dart';
 import 'package:comedor_utt/src/utils/my_colors.dart';
-// import 'package:lottie/lottie.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key key}) : super(key: key);
@@ -33,7 +32,6 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             children: [
               textComedorUtt(),
-              // loadingAnimation(),
               imageBanner(),
               textFieldUserCode(),
               textFieldPassword(),
@@ -45,6 +43,15 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+
+  // Widget _loadingAnimation() {
+  //   return Container(
+  //     margin: EdgeInsets.only(
+  //         top: 25, bottom: MediaQuery.of(context).size.height * 0.10),
+  //     child: Lottie.asset('assets/json/3dots-loading.json',
+  //         width: 200, height: 200, fit: BoxFit.fill),
+  //   );
+  // }
 
   Widget textComedorUtt() {
     return Container(
@@ -80,15 +87,6 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  // Widget _loadingAnimation() {
-  //   return Container(
-  //     margin: EdgeInsets.only(
-  //         top: 25, bottom: MediaQuery.of(context).size.height * 0.10),
-  //     child: Lottie.asset('assets/json/3dots-loading.json',
-  //         width: 200, height: 200, fit: BoxFit.fill),
-  //   );
-  // }
-
   Widget imageBanner() {
     return Container(
       margin: EdgeInsets.only(
@@ -109,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
           borderRadius: BorderRadius.circular(30)),
       child: TextField(
         controller: con.userCodeController,
-        // keyboardType: TextInputType.text,
+        textCapitalization: TextCapitalization.characters,
         decoration: const InputDecoration(
             hintText: 'Matricula/No. Empleado',
             hintStyle: TextStyle(color: MyColors.primaryColorDark),
@@ -132,7 +130,6 @@ class _LoginPageState extends State<LoginPage> {
       child: TextField(
         controller: con.passwordController,
         obscureText: true,
-        // keyboardType: TextInputType.text,
         decoration: const InputDecoration(
             hintText: 'Contraseña',
             hintStyle: TextStyle(color: MyColors.primaryColorDark),
@@ -170,7 +167,6 @@ class _LoginPageState extends State<LoginPage> {
         children: [
           const Text(
             '¿No tienes cuenta?',
-            // Might delete textstyle
             style: TextStyle(color: MyColors.primaryColor),
           ),
           const SizedBox(width: 7),

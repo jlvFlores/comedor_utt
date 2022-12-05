@@ -12,6 +12,7 @@ class User {
   String name;
   String password;
   String sessionToken;
+  String notificationToken;
   List<Rol> roles = [];
 
   User({
@@ -21,6 +22,7 @@ class User {
     this.name,
     this.password,
     this.sessionToken,
+    this.notificationToken,
     this.roles,
   });
 
@@ -31,9 +33,10 @@ class User {
       name: json["name"],
       password: json["password"],
       sessionToken: json["session_token"],
-      roles: json["roles"] == null ? [] : List<Rol>.from(json['roles'].map((model) => Rol.fromJson(model))),
+      notificationToken: json["notification_token"],
+      roles: json["roles"] == null ? [] : List<Rol>.from(json['roles'].map((model) => Rol.fromJson(model))) ?? [],
   );
-
+  
   Map<String, dynamic> toJson() => {
         "id": id,
         "email": email,
@@ -41,6 +44,7 @@ class User {
         "name": name,
         "password": password,
         "session_token": sessionToken,
+        "notification_token": notificationToken,
         "roles": roles,
       };
 }

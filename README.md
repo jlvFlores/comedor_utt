@@ -1,16 +1,9 @@
 # comedor_utt
 
-A new Flutter project.
+Lista de pendientes
+    Arreglar el error con las notificaciones de firebase
+    Crear una peticion al backEnd para borrar y editar productos del menu
+    Desplegar los pedidos ya entregados desde el mas reciente al mas antiguo
+    Solo mostrar los mas actuales 100 pedidos ya entregados en la app
+    Borrar commentarios y prints no nesesarios
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.

@@ -138,7 +138,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                         fontSize: 15,
-                        fontFamily: 'NimbusSans'
+                        fontFamily: 'Roboto'
                       ),
                     ),
                   ),
@@ -301,6 +301,11 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
             onTap: con.goToUpdatePage,
             title: const Text('Editar perfil'),
             trailing: const Icon(Icons.edit_outlined),
+          ),
+          ListTile(
+            onTap: con.goToOrdersList,
+            title: const Text('Mis pedido'),
+            trailing: const Icon(Icons.shopping_cart_outlined),
           ),
           con.user != null ? 
           con.user.roles.length > 1 ?

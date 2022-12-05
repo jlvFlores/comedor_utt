@@ -1,3 +1,4 @@
+import 'package:comedor_utt/src/provider/push_notifications_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:comedor_utt/src/models/user.dart';
 import 'package:comedor_utt/src/models/response_api.dart';
@@ -13,6 +14,8 @@ class LoginController {
   UsersProvider usersProvider = UsersProvider();
   SharedPref sharedPref = SharedPref();
 
+  PushNotificationsProvider pushNotificationsProvider = PushNotificationsProvider();
+
   Future init(BuildContext context) async {
     this.context = context;
     await usersProvider.init(context);
@@ -22,8 +25,10 @@ class LoginController {
     print('User Session Token: ${user.sessionToken}');
     
     // ignore_for_file: use_build_context_synchronously
-    if (user.sessionToken != null) {
-      print('USER LOGGED IN: ${user.toJson()}');
+    if (user?.sessionToken != null) {
+
+      pushNotificationsProvider.saveToken(user.id);
+
       if (user.roles.length > 1) {
         Navigator.pushNamedAndRemoveUntil(context, 'roles', (route) => false);
       } else {
@@ -43,10 +48,10 @@ class LoginController {
 
     print('Respuesta object: $responseApi');
 
-    if (responseApi?.success == true) {
-      User user = User.fromJson(responseApi?.data);
-      sharedPref.save('user',
-          user.toJson()); // Se almacena el usuario dentro del dispositivo
+    if (responseApi.success == true) {
+      User user = User.fromJson(responseApi.data);
+      sharedPref.save('user', user.toJson()); // Se almacena el usuario dentro del dispositivo
+      pushNotificationsProvider.saveToken(user.id);
 
       print('USER LOGGED IN: ${user.toJson()}');
       if (user.roles.length > 1) {

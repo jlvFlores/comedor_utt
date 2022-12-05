@@ -181,7 +181,7 @@ class _ClientProductsDetailPageState extends State<ClientProductsDetailPage> {
                 height: 50,
                 alignment: Alignment.center,
                 child: const Text(
-                  'AGREGAR A LA BOLSA',
+                  'AGREGAR AL PEDIDO',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold

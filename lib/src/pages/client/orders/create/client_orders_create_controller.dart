@@ -1,6 +1,12 @@
-import 'package:comedor_utt/src/models/product.dart';
-import 'package:comedor_utt/src/utils/shared_pref.dart';
+import 'package:comedor_utt/src/models/response_api.dart';
+import 'package:comedor_utt/src/provider/orders_provider.dart';
+import 'package:comedor_utt/src/provider/push_notifications_provider.dart';
+import 'package:comedor_utt/src/provider/users_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:comedor_utt/src/models/order.dart';
+import 'package:comedor_utt/src/models/product.dart';
+import 'package:comedor_utt/src/models/user.dart';
+import 'package:comedor_utt/src/utils/shared_pref.dart';
 
 class ClientOrdersCreateController {
 
@@ -8,6 +14,7 @@ class ClientOrdersCreateController {
   Function refresh;
 
   Product product;
+  User user;
 
   int counter = 1;
   double productPrice;
@@ -16,15 +23,27 @@ class ClientOrdersCreateController {
 
   List<Product> selectedProducts = [];
   double total = 0;
+  
+  UsersProvider usersProvider = UsersProvider();
+  OrdersProvider ordersProvider = OrdersProvider();
+  PushNotificationsProvider pushNotificationsProvider = PushNotificationsProvider();
+
+  List<String> tokens = [];
 
   Future init(BuildContext context, Function refresh) async {
     this.context = context;
     this.refresh = refresh;
 
     selectedProducts = Product.fromJsonList(await sharedPref.read('order')).toList;
+    user = User.fromJson(await sharedPref.read('user'));
+
+    if (!context.mounted) return;
+    usersProvider.init(context, sessionUser: user);
+    ordersProvider.init(context, user);
 
     getTotal();
 
+    tokens = await usersProvider.getAdminsNotificationTokens();
     refresh();
   }
 
@@ -56,5 +75,43 @@ class ClientOrdersCreateController {
     selectedProducts.removeWhere((p) => p.id == product.id);
     sharedPref.save('order', selectedProducts);
     getTotal();
+  }
+
+  void sendNotification() {
+
+    List<String> registrationId = [];
+    for (var t in tokens) {
+      if (t != null) {
+        registrationId.add(t);
+      }
+    }
+
+    Map<String, dynamic> data = {
+      'click_action': 'FLUTTER_NOTIFICATION_CLICK'
+    };
+
+    pushNotificationsProvider.sendMessageMultiple(
+        registrationId,
+        data,
+        'COMPRA EXITOSA',
+        'Un cliente ha realizado un pedido'
+    );
+  }
+
+  void createOrder() async {
+    Order order = Order(
+      idClient: user.id,
+      products: selectedProducts
+    );
+    ResponseApi responseApi = await ordersProvider.create(order);
+    print('Respuesta orden: ${responseApi.message}');
+    
+    sendNotification();
+
+    selectedProducts.length = 0;
+    sharedPref.save('order', selectedProducts);
+    
+    if (!context.mounted) return;
+    Navigator.pushNamedAndRemoveUntil(context, 'client/products/list', (route) => false);
   }
 }

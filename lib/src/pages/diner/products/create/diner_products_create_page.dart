@@ -65,6 +65,7 @@ class _DinerProductsCreatePageState extends State<DinerProductsCreatePage> {
       ),
       child: TextField(
         controller: con.nameController,
+        textCapitalization: TextCapitalization.sentences,
         maxLines: 1,
         maxLength: 180,
         decoration: const InputDecoration(
@@ -91,6 +92,7 @@ class _DinerProductsCreatePageState extends State<DinerProductsCreatePage> {
       ),
       child: TextField(
         controller: con.descriptionController,
+        textCapitalization: TextCapitalization.sentences,
         maxLines: 4,
         maxLength: 255,
         decoration: const InputDecoration(

@@ -1,12 +1,13 @@
-import 'package:comedor_utt/src/models/order.dart';
-import 'package:comedor_utt/src/pages/diner/orders/detail/diner_orders_detail_page.dart';
-import 'package:comedor_utt/src/provider/orders_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:comedor_utt/src/models/user.dart';
+import 'package:comedor_utt/src/pages/client/orders/detail/client_orders_detail_page.dart';
+import 'package:comedor_utt/src/provider/orders_provider.dart';
 import 'package:comedor_utt/src/utils/shared_pref.dart';
+import 'package:comedor_utt/src/models/order.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-class DinerOrdersListController {
+class ClientOrdersListController {
+
   BuildContext context;
   SharedPref sharedPref = SharedPref();
   GlobalKey<ScaffoldState> key = GlobalKey<ScaffoldState>();
@@ -23,20 +24,19 @@ class DinerOrdersListController {
     this.refresh = refresh;
     user = User.fromJson(await sharedPref.read('user'));
 
-    if (!context.mounted) return null;
+    if (!context.mounted) return;
     ordersProvider.init(context, user);
-
     refresh();
   }
 
   Future<List<Order>> getOrders(String status) async {
-    return await ordersProvider.getByStatus(status);
+    return await ordersProvider.getByClientAndStatus(user?.id, status);
   }
 
-  Future<void> openBottomSheet(Order order) async {
+  void openBottomSheet(Order order) async {
     isUpdated = await showMaterialModalBottomSheet(
-      context: context,
-      builder: (context) => DinerOrdersDetailPage(order: order)
+        context: context,
+        builder: (context) => ClientOrdersDetailPage(order: order)
     );
 
     if (isUpdated != null && isUpdated) {
@@ -49,11 +49,11 @@ class DinerOrdersListController {
   }
 
   void goToCategoryCreate() {
-    Navigator.pushNamed(context, 'diner/categories/create');
+    Navigator.pushNamed(context, 'restaurant/categories/create');
   }
 
   void goToProductCreate() {
-    Navigator.pushNamed(context, 'diner/products/create');
+    Navigator.pushNamed(context, 'restaurant/products/create');
   }
 
   void openDrawer() {
