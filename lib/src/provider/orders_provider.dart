@@ -123,4 +123,27 @@ class OrdersProvider {
       return null;
     }
   }
+
+  Future<ResponseApi> delete(String orderId) async {
+    try {
+      Uri url = Uri.http(_url, '$_api/delete/$orderId');
+      Map<String, String> headers = {
+        'Content-type': 'application/json',
+      };
+      final res = await http.post(url, headers: headers);
+
+      if (res.statusCode == 401) { // No autorizado
+        Fluttertoast.showToast(msg: 'Tu session expiro');
+        // if (!context.mounted) return null;
+        SharedPref().logout(context, sessionUser.id);
+      }
+
+      final data = json.decode(res.body);
+      ResponseApi responseApi = ResponseApi.fromJson(data);
+      return responseApi;
+    } catch (e) {
+      print('Error: $e');
+      return null;
+    }
+  }
 }

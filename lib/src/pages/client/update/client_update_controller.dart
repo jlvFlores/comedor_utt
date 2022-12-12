@@ -14,7 +14,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 class ClientUpdateController {
   BuildContext context;
   TextEditingController nameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   UsersProvider usersProvider = UsersProvider();
 
@@ -29,14 +29,14 @@ class ClientUpdateController {
     usersProvider.init(context, sessionUser: user);
     
     nameController.text = user.name;
-    emailController.text = user.email;
+    passwordController.text = '';
   }
 
   void update() async {
     String name = nameController.text;
-    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
 
-    if (name.isEmpty || email.isEmpty) {
+    if (name.isEmpty || password.isEmpty) {
       Fluttertoast.showToast(msg: 'Debes ingresar todos los campos');
       return;
     }
@@ -45,8 +45,8 @@ class ClientUpdateController {
         id: user.id,
         userCode: user.userCode,
         name: name,
-        email: email,
-        password: user.password,
+        email: user.email,
+        password: password,
         sessionToken: user.sessionToken,
         roles: user.roles
     );

@@ -8,7 +8,6 @@ import 'package:comedor_utt/src/provider/users_provider.dart';
 
 class RegisterController {
   BuildContext context;
-  TextEditingController emailController = TextEditingController();
   TextEditingController userCodeController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -23,14 +22,12 @@ class RegisterController {
   }
 
   void register() async {
-    String email = emailController.text.trim();
     String userCode = userCodeController.text.trim();
     String name = nameController.text;
     String password = passwordController.text.trim();
     String confirmPassword = confirmPasswordController.text.trim();
 
-    if (email.isEmpty ||
-        userCode.isEmpty ||
+    if (userCode.isEmpty ||
         name.isEmpty ||
         password.isEmpty ||
         confirmPassword.isEmpty) {
@@ -50,7 +47,6 @@ class RegisterController {
 
     User user = User(
         id: '',
-        email: email,
         userCode: userCode,
         name: name,
         password: password,
@@ -70,7 +66,6 @@ class RegisterController {
     }
 
     print('RESPUESTA: ${responseApi?.toJson()}');
-    print(email);
     print(userCode);
     print(name);
     print(password);

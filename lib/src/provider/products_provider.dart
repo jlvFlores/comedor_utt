@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:comedor_utt/src/models/response_api.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:comedor_utt/src/api/environment.dart';
 import 'package:comedor_utt/src/models/product.dart';
@@ -22,6 +23,30 @@ class ProductsProvider {
   Future init(BuildContext context, User sessionUser) async {
     this.context = context;
     this.sessionUser = sessionUser;
+  }
+
+  Future<List<Product>> getAll() async {
+    try {
+      Uri url = Uri.http(_url, '$_api/getAll');
+      Map<String, String> headers = {
+        'Content-type': 'application/json',
+        'Authorization': sessionUser.sessionToken
+      };
+      final res = await http.get(url, headers: headers);
+
+      if (res.statusCode == 401) {
+        Fluttertoast.showToast(msg: 'Sesion expirada');
+        // if (!context.mounted) return null;
+        SharedPref().logout(context, sessionUser.id);
+      }
+      final data = json.decode(res.body); // PRODUCTOS
+      Product product = Product.fromJsonList(data);
+      return product.toList;
+    }
+    catch(e) {
+      print('Error: $e');
+      return [];
+    }
   }
 
   Future<List<Product>> getByCategory(String idCategory) async {
@@ -72,6 +97,30 @@ class ProductsProvider {
     }
   }
 
+  Future<List<Product>> getByProductName(String productName) async {
+    try {
+      Uri url = Uri.http(_url, '$_api/findByProductName/$productName');
+      Map<String, String> headers = {
+        'Content-type': 'application/json',
+        'Authorization': sessionUser.sessionToken
+      };
+      final res = await http.get(url, headers: headers);
+
+      if (res.statusCode == 401) {
+        Fluttertoast.showToast(msg: 'Sesion expirada');
+        // if (!context.mounted) return null;
+        SharedPref().logout(context, sessionUser.id);
+      }
+      final data = json.decode(res.body); // PRODUCTOS
+      Product product = Product.fromJsonList(data);
+      return product.toList;
+    }
+    catch(e) {
+      print('Error: $e');
+      return [];
+    }
+  }
+
   Future<Stream> create(Product product, List<File> images) async {
     try {
       Uri url = Uri.http(_url, '$_api/create');
@@ -92,6 +141,29 @@ class ProductsProvider {
       return response.stream.transform(utf8.decoder);
     }
     catch(e) {
+      print('Error: $e');
+      return null;
+    }
+  }
+
+  Future<ResponseApi> delete(String productId) async {
+    try {
+      Uri url = Uri.http(_url, '$_api/delete/$productId');
+      Map<String, String> headers = {
+        'Content-type': 'application/json',
+      };
+      final res = await http.post(url, headers: headers);
+
+      if (res.statusCode == 401) { // No autorizado
+        Fluttertoast.showToast(msg: 'Tu session expiro');
+        // if (!context.mounted) return null;
+        SharedPref().logout(context, sessionUser.id);
+      }
+
+      final data = json.decode(res.body);
+      ResponseApi responseApi = ResponseApi.fromJson(data);
+      return responseApi;
+    } catch (e) {
       print('Error: $e');
       return null;
     }

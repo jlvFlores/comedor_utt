@@ -2,7 +2,6 @@
 
 import 'package:comedor_utt/src/models/response_api.dart';
 import 'package:comedor_utt/src/provider/orders_provider.dart';
-import 'package:comedor_utt/src/provider/push_notifications_provider.dart';
 import 'package:comedor_utt/src/provider/users_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:comedor_utt/src/models/order.dart';
@@ -28,7 +27,6 @@ class ClientOrdersCreateController {
   
   UsersProvider usersProvider = UsersProvider();
   OrdersProvider ordersProvider = OrdersProvider();
-  PushNotificationsProvider pushNotificationsProvider = PushNotificationsProvider();
 
   List<String> tokens = [];
 
@@ -79,26 +77,6 @@ class ClientOrdersCreateController {
     getTotal();
   }
 
-  void sendNotification() {
-
-    List<String> registrationId = [];
-    for (var t in tokens) {
-      if (t != null) {
-        registrationId.add(t);
-      }
-    }
-
-    Map<String, dynamic> data = {
-      'click_action': 'FLUTTER_NOTIFICATION_CLICK'
-    };
-
-    pushNotificationsProvider.sendMessageMultiple(
-        registrationId,
-        data,
-        'COMPRA EXITOSA',
-        'Un cliente ha realizado un pedido'
-    );
-  }
 
   void createOrder() async {
     Order order = Order(
@@ -108,8 +86,6 @@ class ClientOrdersCreateController {
     ResponseApi responseApi = await ordersProvider.create(order);
     print('Respuesta orden: ${responseApi.message}');
     
-    sendNotification();
-
     selectedProducts.length = 0;
     sharedPref.save('order', selectedProducts);
     

@@ -5,14 +5,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:comedor_utt/src/models/user.dart';
 import 'package:comedor_utt/src/models/product.dart';
-import 'package:comedor_utt/src/models/category.dart';
 import 'package:comedor_utt/src/provider/categories_provider.dart';
 import 'package:comedor_utt/src/provider/products_provider.dart';
-import 'package:comedor_utt/src/pages/client/products/detail/client_products_detail_page.dart';
 import 'package:comedor_utt/src/utils/shared_pref.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-class ClientProductsListController {
+class DinerProductsListController {
   
   BuildContext context;
   SharedPref sharedPref = SharedPref();
@@ -22,7 +19,7 @@ class ClientProductsListController {
   
   CategoriesProvider categoriesProvider = CategoriesProvider();
   ProductsProvider productsProvider = ProductsProvider();
-  List<Category> categories = [];
+  List<Product> products = [];
 
   StreamController<String> streamController = StreamController();
   TextEditingController searchController = TextEditingController();
@@ -30,6 +27,7 @@ class ClientProductsListController {
   Timer searchOnStoppedTyping;
 
   String productName = '';
+  bool isUpdated;
 
   Future init(BuildContext context, Function refresh) async {
     this.context = context;
@@ -40,7 +38,6 @@ class ClientProductsListController {
     categoriesProvider.init(context, user);
     productsProvider.init(context, user);
 
-    getCategories();
     refresh();
   }
 
@@ -59,24 +56,40 @@ class ClientProductsListController {
     });
   }
 
-  Future<List<Product>> getProducts(String idCategory, String productName) async {
+  Future<List<Product>> getProducts(String productName) async {
     if (productName.isEmpty) {
-      return await productsProvider.getByCategory(idCategory);
+      return await productsProvider.getAll();
     }
     else {
-      return await productsProvider.getByCategoryAndProductName(idCategory, productName);
+      return await productsProvider.getByProductName(productName);
     }
   }
 
-  void getCategories() async {
-    categories = await categoriesProvider.getAll();
-    refresh();
-  }
+  void showAlertDialog(Product product) {
+    Widget deleteButton = ElevatedButton(
+        onPressed: () {
+          Navigator.pop(context);
+          productsProvider.delete(product.id);
+          refresh();
+        },
+        child: const Text('BORRAR'));
 
-  void openBottomSheet(Product product) {
-    showMaterialModalBottomSheet(
-        context: context,
-        builder: (context) => ClientProductsDetailPage(product: product)
+    Widget cancelButton = ElevatedButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: const Text('CANCELAR'));
+
+    AlertDialog alertDialog = AlertDialog(
+      title: const Text('¿Seguro que desea borrar este producto?!'),
+      actions: [deleteButton, cancelButton],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alertDialog;
+      }
     );
   }
 

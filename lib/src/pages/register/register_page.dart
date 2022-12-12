@@ -32,16 +32,15 @@ class _RegisterPageState extends State<RegisterPage> {
             SingleChildScrollView(
               child: Column(
                 children: [
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  const SizedBox(height: 10),
                   textRegister(),
                   imageUser(),
-                  textFieldEmail(),
+                  // textFieldEmail(),
                   textFieldUserCode(),
                   textFieldName(),
                   textFieldPassword(),
                   textFieldConfirmPassword(),
+                  const SizedBox(height: 50),
                   buttonRegister(),
                 ],
               ),
@@ -96,27 +95,27 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget textFieldEmail() {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 5),
-      decoration: BoxDecoration(
-          color: MyColors.primaryOpacityColor,
-          borderRadius: BorderRadius.circular(30)),
-      child: TextField(
-        controller: con.emailController,
-        keyboardType: TextInputType.emailAddress,
-        decoration: const InputDecoration(
-            hintText: 'Correo electronico',
-            hintStyle: TextStyle(color: MyColors.primaryColorDark),
-            border: InputBorder.none,
-            contentPadding: EdgeInsets.all(15),
-            prefixIcon: Icon(
-              Icons.mail,
-              color: MyColors.primaryColor,
-            )),
-      ),
-    );
-  }
+  // Widget textFieldEmail() {
+  //   return Container(
+  //     margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 5),
+  //     decoration: BoxDecoration(
+  //         color: MyColors.primaryOpacityColor,
+  //         borderRadius: BorderRadius.circular(30)),
+  //     child: TextField(
+  //       controller: con.emailController,
+  //       keyboardType: TextInputType.emailAddress,
+  //       decoration: const InputDecoration(
+  //           hintText: 'Correo electronico',
+  //           hintStyle: TextStyle(color: MyColors.primaryColorDark),
+  //           border: InputBorder.none,
+  //           contentPadding: EdgeInsets.all(15),
+  //           prefixIcon: Icon(
+  //             Icons.mail,
+  //             color: MyColors.primaryColor,
+  //           )),
+  //     ),
+  //   );
+  // }
   
   Widget textFieldUserCode() {
     return Container(

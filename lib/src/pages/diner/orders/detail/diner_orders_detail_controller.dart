@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:comedor_utt/src/provider/push_notifications_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:comedor_utt/src/models/order.dart';
 import 'package:comedor_utt/src/models/product.dart';
@@ -28,8 +27,6 @@ class DinerOrdersDetailController {
   User user;
   OrdersProvider ordersProvider = OrdersProvider();
 
-  PushNotificationsProvider pushNotificationsProvider = PushNotificationsProvider();
-
   Future init(BuildContext context, Function refresh, Order order) async {
     this.context = context;
     this.refresh = refresh;
@@ -44,24 +41,14 @@ class DinerOrdersDetailController {
     refresh();
   }
 
-  void sendNotification(String tokenConfirm) {
-
-    Map<String, dynamic> data = {
-      'click_action': 'FLUTTER_NOTIFICATION_CLICK'
-    };
-
-    pushNotificationsProvider.sendMessage(
-        tokenConfirm,
-        data,
-        'PEDIDO REGISTRADO',
-        'Tu pedido estará preparado en 15 minutos'
-    );
-  }
+  // void deleteOrder(Order order) {
+  //   ordersProvider.delete(order.id);
+  //   Navigator.pop(context);
+  //   refresh();
+  // }
 
   void updateOrder() async {
     ResponseApi responseApi = await ordersProvider.updateToDelivered(order);
-
-    sendNotification(user.notificationToken);
 
     Fluttertoast.showToast(msg: responseApi.message, toastLength: Toast.LENGTH_LONG);
     

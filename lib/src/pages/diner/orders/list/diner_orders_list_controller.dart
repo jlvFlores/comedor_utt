@@ -58,6 +58,10 @@ class DinerOrdersListController {
     Navigator.pushNamed(context, 'diner/products/create');
   }
 
+  void goToProductList() {
+    Navigator.pushNamed(context, 'diner/products/list');
+  }
+
   void openDrawer() {
     key.currentState.openDrawer();
   }

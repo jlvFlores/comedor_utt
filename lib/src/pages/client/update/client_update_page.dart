@@ -35,7 +35,7 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
             children: [
               const SizedBox(height: 50),
               textFieldName(),
-              textFieldEmail(),
+              textFieldPassword(),
             ],
           ),
         ),
@@ -69,17 +69,17 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
     );
   }
 
-  Widget textFieldEmail() {
+  Widget textFieldPassword() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 5),
       decoration: BoxDecoration(
           color: MyColors.primaryOpacityColor,
           borderRadius: BorderRadius.circular(30)),
       child: TextField(
-        controller: con.emailController,
-        keyboardType: TextInputType.emailAddress,
+        controller: con.passwordController,
+        obscureText: true,
         decoration: const InputDecoration(
-            hintText: 'Correo electronico',
+            hintText: 'Contraseña',
             hintStyle: TextStyle(color: MyColors.primaryColorDark),
             border: InputBorder.none,
             contentPadding: EdgeInsets.all(15),

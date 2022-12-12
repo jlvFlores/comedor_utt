@@ -238,6 +238,11 @@ class _DinerOrdersListPageState extends State<DinerOrdersListPage> {
             title: const Text('Crear producto'),
             trailing: const Icon(Icons.local_pizza),
           ),
+          ListTile(
+            onTap: con.goToProductList,
+            title: const Text('Borrar productos'),
+            trailing: const Icon(Icons.local_pizza_outlined),
+          ),
           con.user != null ? 
           con.user.roles.length > 1 ?
           ListTile(

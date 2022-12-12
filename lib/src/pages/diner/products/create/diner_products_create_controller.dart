@@ -77,7 +77,6 @@ class DinerProductsCreateController {
     Product product = Product(
       name: name,
       description: description,
-      image1: '',
       price: price,
       idCategory: int.parse(idCategory)
     );

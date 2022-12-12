@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:comedor_utt/src/models/product.dart';
-import 'package:comedor_utt/src/models/category.dart';
 import 'package:comedor_utt/src/utils/my_colors.dart';
-import 'package:comedor_utt/src/pages/client/products/list/client_products_list_controller.dart';
+import 'package:comedor_utt/src/pages/diner/products/list/diner_products_list_controller.dart';
 import 'package:comedor_utt/src/widgets/no_data_widget.dart';
 
-class ClientProductsListPage extends StatefulWidget {
-    const ClientProductsListPage({Key key}) : super(key: key);
+class DinerProductsListPage extends StatefulWidget {
+    const DinerProductsListPage({Key key}) : super(key: key);
 
   @override
-  State<ClientProductsListPage> createState() => _ClientProductsListPageState();
+  State<DinerProductsListPage> createState() => _DinerProductsListPageState();
 }
 
-class _ClientProductsListPageState extends State<ClientProductsListPage> {
+class _DinerProductsListPageState extends State<DinerProductsListPage> {
   
-  ClientProductsListController con = ClientProductsListController();
+  DinerProductsListController con = DinerProductsListController();
 
   @override
   void initState() {
@@ -26,82 +25,56 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
     });
   }
 
-  @override
+@override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: con.categories.length,
-      child: Scaffold(
-        key: con.key,
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(170),
-          child: AppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: Colors.white,
-            actions: [
-              shoppingBag()
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(115),
+        child: AppBar(
+          title: const Text('Editar productos'),        
+          flexibleSpace: Column(
+            children: [
+              const SizedBox(height: 80),
+              textFieldSearch()
             ],
-            flexibleSpace: Column(
-              children: [
-                const SizedBox(height: 40),
-                menuDrawerIcon(),
-                const SizedBox(height: 20),
-                textFieldSearch()
-              ],
-            ),
-            bottom: TabBar(
-              indicatorColor: MyColors.primaryColor,
-              labelColor: Colors.black,
-              unselectedLabelColor: Colors.grey[400],
-              isScrollable: true,
-              tabs: List<Widget>.generate(con.categories.length, (index) {
-                return Tab(
-                  child: Text(con.categories[index].name ?? ''),
-                );
-              }),
-            ),
           ),
         ),
-        drawer: drawer(),
-        body: TabBarView(
-          children: con.categories.map((Category category) {
-            return FutureBuilder(
-                future: con.getProducts(category.id, con.productName),
-                builder: (context, AsyncSnapshot<List<Product>> snapshot) {
-
-                  if (snapshot.hasData) {
-
-                    if (snapshot.data.isNotEmpty) {
-                      return GridView.builder(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            childAspectRatio: 0.8
-                        ),
-                        itemCount: snapshot.data?.length ?? 0,
-                        itemBuilder: (_, index) {
-                          return cardProduct(snapshot.data[index]);
-                        }
-                      );
-                    }
-                    else {
-                      return const NoDataWidget(text: 'No hay productos');
-                    }
-                  }
-                  else {
-                    return const NoDataWidget(text: 'No hay productos');
-                  }
-                }
-            );
-          }).toList(),
-        )
       ),
+      body: FutureBuilder(
+        future: con.getProducts(con.productName),
+        builder: (context, AsyncSnapshot<List<Product>> snapshot) {
+
+          if (snapshot.hasData) {
+
+            if (snapshot.data.isNotEmpty) {
+              return GridView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.8
+                ),
+                itemCount: snapshot.data?.length ?? 0,
+                itemBuilder: (_, index) {
+                  return cardProduct(snapshot.data[index]);
+                }
+              );
+            }
+            else {
+              return const NoDataWidget(text: 'No hay productos');
+            }
+          }
+          else {
+            return const NoDataWidget(text: 'No hay productos');
+          }
+        }
+      )
     );
   }
 
   Widget cardProduct(Product product) {
     return GestureDetector(
       onTap: () {
-        con.openBottomSheet(product);
+        con.showAlertDialog(product);
       },
       child: SizedBox(
         height: 150,
@@ -168,7 +141,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
                       topRight: Radius.circular(20),
                     )
                   ),
-                  child: const Icon(Icons.add, color: Colors.white,),
+                  child: const Icon(Icons.delete, color: Colors.white,),
                 )
               )
             ],
@@ -213,15 +186,16 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
       margin: const EdgeInsets.symmetric(horizontal: 20),
       child: TextField(
         onChanged: con.onChangeText,
+        style: const TextStyle(color: Colors.white),
         decoration: InputDecoration(
           hintText: 'Buscar',
-          suffixIcon: Icon(
+          suffixIcon: const Icon(
             Icons.search,
-            color: Colors.grey[400]
+            color: Colors.white
           ),
-          hintStyle: TextStyle(
+          hintStyle: const TextStyle(
             fontSize: 17,
-            color: Colors.grey[500]
+            color: Colors.white
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(25),
